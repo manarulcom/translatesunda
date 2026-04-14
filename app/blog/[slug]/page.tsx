@@ -53,5 +53,35 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  return <ArticlePage article={article} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    image: [`${SITE_URL}/og-image.png`], 
+    datePublished: new Date(article.date).toISOString(),
+    author: [{
+        "@type": "Organization",
+        name: "Translate Jawa",
+        url: SITE_URL
+    }],
+    publisher: {
+      "@type": "Organization",
+      name: "Translate Jawa",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/icon.png`
+      }
+    }
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ArticlePage article={article} />
+    </>
+  );
 }
