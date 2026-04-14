@@ -62,7 +62,7 @@ export default function ArticlePage({ article, setPage, setArticle }: ArticlePag
         {related.length > 0 && (
           <div style={{ marginBottom: 64 }}>
             <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 20px" }}>Artikel Terkait</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+            <div className="steps-grid" style={{ gap: 16 }}>
               {related.map(a => (
                 <div key={a.slug} onClick={() => { setArticle(a); setPage("article"); window.scrollTo?.(0,0); }}
                   style={{ background: C.bg2, borderRadius: 12, padding: 16, border: `1px solid ${C.border2}`, cursor: "pointer", transition: "background 0.15s" }}

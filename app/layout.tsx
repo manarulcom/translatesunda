@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import JsonLd from "./JsonLd";
 
@@ -81,6 +82,9 @@ export const metadata: Metadata = {
       { url: "/apple-icon.png", sizes: "180x180" },
     ],
   },
+  verification: {
+    google: "On-s97fmEqILNE3_81aK_tduEriR4enmDt_VhGXONAk",
+  },
 };
 
 export default function RootLayout({
@@ -90,6 +94,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
+      <head>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-ES9XHP1DSB"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-ES9XHP1DSB');
+          `}
+        </Script>
+      </head>
       <body>
         <JsonLd />
         {children}
