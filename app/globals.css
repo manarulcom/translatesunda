@@ -52,6 +52,11 @@ input, textarea {
 .nav-links-desktop { display: flex; }
 
 /* Grids */
+.translator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .steps-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -76,6 +81,9 @@ input, textarea {
   /* NavBar: hide links, show hamburger */
   .nav-hamburger { display: flex !important; }
   .nav-links-desktop { display: none !important; }
+
+  /* TranslatorBox */
+  .translator-grid { grid-template-columns: 1fr !important; }
 
   /* Steps: 1 column */
   .steps-grid { grid-template-columns: 1fr !important; }

@@ -45,22 +45,11 @@ function AppInner() {
         <footer style={{
           borderTop: `1px solid ${C.border3}`,
           padding: "24px 0",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          textAlign: "center",
           fontSize: 14,
           color: C.text3,
         }}>
-          <span>© 2026 Translate Jawa.</span>
-          <div style={{ display: "flex", gap: 24 }}>
-            {([["Translate","home"],["Blog","blog"],["Tentang","tentang"],["Kontak","kontak"]] as [string,string][]).map(([l,p]) => (
-              <span key={p} onClick={() => goPage(p)} style={{ cursor: "pointer", transition: "color 0.15s" }}
-                onMouseEnter={e => e.currentTarget.style.color = G}
-                onMouseLeave={e => e.currentTarget.style.color = C.text3}>
-                {l}
-              </span>
-            ))}
-          </div>
+          © 2026 BahasaJawa.id - Translate Bahasa Jawa.
         </footer>
       </div>
     </div>

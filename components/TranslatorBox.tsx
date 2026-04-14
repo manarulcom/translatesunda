@@ -119,16 +119,16 @@ export default function TranslatorBox({ fromLang, setFromLang, toLang, setToLang
     <div style={{
       background: C.bg, borderRadius: 16, padding: "28px 28px 24px",
       border: `1.5px solid ${C.border4}`, boxShadow: `0 4px 32px ${C.shadow}`,
-      transition: "background 0.2s, border-color 0.2s",
+      transition: "background 0.2s, border-color 0.2s", textAlign: "left",
     }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20 }}>
+      <div className="translator-grid" style={{ gap: 16, marginBottom: 20 }}>
         <CustomSelect label="Translate dari" options={FROM_OPTS as unknown as string[]} value={fromLang}
           onChange={v => { setFromLang(v); setToLang(""); setResult(""); setError(""); }} />
         <CustomSelect label="Translate ke" options={fromLang ? TO_OPTS_MAP[fromLang] : []} value={toLang}
           onChange={v => { setToLang(v); setResult(""); setError(""); }} disabled={!fromLang} />
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="translator-grid" style={{ gap: 12 }}>
         {/* Input */}
         <div style={{ position: "relative" }}>
           <textarea
@@ -171,7 +171,7 @@ export default function TranslatorBox({ fromLang, setFromLang, toLang, setToLang
             <p style={{ margin: 0, fontSize: 14, color: "#f87171", lineHeight: 1.6 }}>⚠️ {error}</p>
           ) : result ? (
             <>
-              <p className="fade-in" style={{ margin: 0, fontSize: 15, color: C.text, lineHeight: 1.65, whiteSpace: "pre-wrap", paddingBottom: 32 }}>
+              <p className="fade-in" style={{ margin: 0, fontSize: 15, color: C.text, lineHeight: 1.65, whiteSpace: "pre-wrap", paddingBottom: 32, textAlign: "left" }}>
                 {result}
               </p>
               <button
