@@ -31,6 +31,13 @@ const webApplicationSchema = {
     "Translate Indonesia ke Krama Alus",
     "Translate Jawa ke Indonesia",
   ],
+};
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Translate Jawa",
+  url: SITE_URL,
   knowsAbout: [
     { "@type": "Thing", name: "Bahasa Jawa", sameAs: "https://id.wikipedia.org/wiki/Bahasa_Jawa" },
     { "@type": "Thing", name: "Ngoko", sameAs: "https://id.wikipedia.org/wiki/Ngoko" },
@@ -119,6 +126,10 @@ export default function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
       />
       <script
         type="application/ld+json"
