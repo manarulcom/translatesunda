@@ -33,11 +33,13 @@ const webApplicationSchema = {
   ],
 };
 
-const webSiteSchema = {
+const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
+  "@type": "Organization",
   name: "Translate Jawa",
   url: SITE_URL,
+  logo: `${SITE_URL}/icon.png`,
+  sameAs: [SITE_URL],
   knowsAbout: [
     { "@type": "Thing", name: "Bahasa Jawa", sameAs: "https://id.wikipedia.org/wiki/Bahasa_Jawa" },
     { "@type": "Thing", name: "Ngoko", sameAs: "https://id.wikipedia.org/wiki/Ngoko" },
@@ -129,7 +131,7 @@ export default function JsonLd() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <script
         type="application/ld+json"
