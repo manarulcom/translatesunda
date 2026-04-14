@@ -6,11 +6,12 @@ import ArticlePage from "@/components/ArticlePage";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://bahasajawa.id";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
   
   if (!article) {
     return { title: "Artikel Tidak Ditemukan" };
@@ -44,8 +45,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }: Props) {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
 
   if (!article) {
     notFound();
