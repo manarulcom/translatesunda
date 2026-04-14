@@ -68,10 +68,10 @@ export default function HomePage({ fromLang, setFromLang, toLang, setToLang, set
       {/* Hero */}
       <div style={{ textAlign: "center", padding: "56px 0 40px" }}>
         <Badge text="Gratis & Tanpa Registrasi" />
-        <h1 style={{ fontSize: 52, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em", lineHeight: 1.1 }}>
+        <h1 className="hero-h1" style={{ fontSize: 52, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em", lineHeight: 1.1 }}>
           Translate Jawa
         </h1>
-        <p style={{ fontSize: 17, color: C.text2, margin: "0 auto 48px", maxWidth: 520, lineHeight: 1.7 }}>
+        <p className="hero-p" style={{ fontSize: 17, color: C.text2, margin: "0 auto 48px", maxWidth: 520, lineHeight: 1.7 }}>
           Terjemahkan bahasa Jawa ke Indonesia atau Indonesia ke Jawa dengan versi Ngoko, Krama Lugu, dan Krama Alus.
         </p>
         <div ref={tRef}>
@@ -82,9 +82,9 @@ export default function HomePage({ fromLang, setFromLang, toLang, setToLang, set
       {/* How to use */}
       <div style={{ padding: "64px 0 48px", textAlign: "center" }}>
         <Badge text="Cara Penggunaan" />
-        <h2 style={{ fontSize: 32, fontWeight: 700, color: C.text, margin: "0 0 12px" }}>Translate Bahasa Jawa ke Indonesia dan Sebaliknya</h2>
+        <h2 className="section-h2" style={{ fontSize: 32, fontWeight: 700, color: C.text, margin: "0 0 12px" }}>Translate Bahasa Jawa ke Indonesia dan Sebaliknya</h2>
         <p style={{ color: C.text2, fontSize: 16, margin: "0 0 40px" }}>Terjemahkan kata, kalimat, hingga teks dengan mudah dan cepat.</p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
+        <div className="steps-grid">
           {[
             { n:"1", t:"Pilih Bahasa", d:"Pilih bahasa terjemahan, dari Indonesia ke Jawa atau Jawa ke Indonesia." },
             { n:"2", t:"Masukkan Teks", d:"Ketik atau paste teks yang ingin diterjemahkan pada kolom yang tersedia." },
@@ -102,12 +102,12 @@ export default function HomePage({ fromLang, setFromLang, toLang, setToLang, set
       {/* Features */}
       <div style={{ padding: "16px 0 64px" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <h2 style={{ fontSize: 32, fontWeight: 700, color: C.text, margin: "0 0 12px" }}>Opsi Terjemahan</h2>
+          <h2 className="section-h2" style={{ fontSize: 32, fontWeight: 700, color: C.text, margin: "0 0 12px" }}>Opsi Terjemahan</h2>
           <p style={{ color: C.text2, fontSize: 16 }}>Pilihan translate bahasa Jawa berdasarkan unggah-ungguh Jawa anyar.</p>
         </div>
         {FEATURES.map((f, i) => (
-          <div key={i} style={{ display: "grid", gridTemplateColumns: i%2===0 ? "1fr 1.2fr" : "1.2fr 1fr", gap: 48, alignItems: "center", marginBottom: 64 }}>
-            {i%2!==0 && <MockCard f={f} />}
+          <div key={i} className="feature-row" style={{ display: "grid", gridTemplateColumns: i%2===0 ? "1fr 1.2fr" : "1.2fr 1fr", gap: 48, alignItems: "center", marginBottom: 64 }}>
+            {i%2!==0 && <div className="feature-mock"><MockCard f={f} /></div>}
             <div>
               <div style={{ fontSize: 28, marginBottom: 12 }}>{f.icon}</div>
               <h3 style={{ fontSize: 24, fontWeight: 700, color: C.text, margin: "0 0 12px" }}>{f.title}</h3>
@@ -117,7 +117,7 @@ export default function HomePage({ fromLang, setFromLang, toLang, setToLang, set
                 Coba sekarang →
               </button>
             </div>
-            {i%2===0 && <MockCard f={f} />}
+            {i%2===0 && <div className="feature-mock"><MockCard f={f} /></div>}
           </div>
         ))}
       </div>

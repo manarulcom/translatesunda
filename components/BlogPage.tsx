@@ -34,7 +34,7 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
     <div style={{ paddingTop: 48 }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <Badge text="Blog" />
-        <h1 style={{ fontSize: 44, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em" }}>Artikel Bahasa Jawa</h1>
+        <h1 className="blog-h1" style={{ fontSize: 44, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em" }}>Artikel Bahasa Jawa</h1>
         <p style={{ fontSize: 17, color: C.text2, maxWidth: 480, margin: "0 auto 28px", lineHeight: 1.8 }}>
           Tips, panduan, sejarah, dan budaya seputar bahasa Jawa untuk semua kalangan.
         </p>
@@ -44,8 +44,8 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
 
       {/* Featured */}
       {!search && cat === "Semua" && (
-        <div onClick={() => openArticle(featured)}
-          style={{ background: C.greenBg, borderRadius: 20, padding: "36px", border: `1.5px solid ${C.greenBorder}`, marginBottom: 48, cursor: "pointer", display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center", transition: "background 0.2s" }}
+        <div className="featured-article" onClick={() => openArticle(featured)}
+          style={{ background: C.greenBg, borderRadius: 20, padding: "36px", border: `1.5px solid ${C.greenBorder}`, marginBottom: 48, cursor: "pointer", transition: "background 0.2s" }}
           onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.05)"}
           onMouseLeave={e => e.currentTarget.style.filter = "none"}
         >
@@ -58,7 +58,7 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
             <p style={{ color: C.text2, fontSize: 15, lineHeight: 1.7, margin: "0 0 16px" }}>{featured.excerpt}</p>
             <div style={{ fontSize: 13, color: C.text3 }}>{featured.date} · {featured.readTime} baca</div>
           </div>
-          <div style={{ fontSize: 72 }}>{featured.cover}</div>
+          <div className="featured-emoji" style={{ fontSize: 72 }}>{featured.cover}</div>
         </div>
       )}
 
@@ -73,7 +73,7 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
       </div>
 
       {/* Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, marginBottom: 64 }}>
+      <div className="blog-grid">
         {filtered.map(a => (
           <div key={a.slug} onClick={() => openArticle(a)}
             style={{ background: C.bg, borderRadius: 14, border: `1.5px solid ${C.border2}`, overflow: "hidden", cursor: "pointer", transition: "box-shadow 0.2s, transform 0.2s" }}

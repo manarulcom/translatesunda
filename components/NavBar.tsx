@@ -9,92 +9,147 @@ interface NavBarProps {
   setPage: (p: string) => void;
 }
 
+const NAV_LINKS = [["Translate","home"],["Blog","blog"],["Tentang","tentang"],["Kontak","kontak"]] as [string,string][];
+
 export default function NavBar({ page, setPage }: NavBarProps) {
   const { isDark, setTheme } = useTheme();
   const C = colors(isDark);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function navigate(p: string) {
+    setPage(p);
+    setMenuOpen(false);
+    setShowThemeMenu(false);
+  }
+
+  const ThemeOptions = ([["☀️","Terang","light"],["🌙","Gelap","dark"]] as [string,string,"light"|"dark"][]);
+  const isActive = (t: "light"|"dark") => isDark ? t === "dark" : t === "light";
 
   return (
-    <nav style={{
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "18px 0 14px", borderBottom: `1px solid ${C.border3}`,
-    }}>
-      {/* Logo */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => setPage("home")}>
-        <div style={{ width: 32, height: 32, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>
-          <img
-            src="/icon.png"
-            alt="Translate Jawa"
-            width={32}
-            height={32}
-            style={{ objectFit: "cover", display: "block" }}
-          />
+    <nav style={{ borderBottom: `1px solid ${C.border3}`, position: "relative" }}>
+      {/* ── Main bar ── */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 0" }}>
+
+        {/* Logo */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => navigate("home")}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>
+            <img src="/icon.png" alt="Translate Jawa" width={32} height={32} style={{ objectFit: "cover", display: "block" }} />
+          </div>
+          <span style={{ fontWeight: 600, fontSize: 16, color: C.text }}>Translate Jawa</span>
+          <span style={{ fontSize: 11, border: `1px solid ${C.border}`, borderRadius: 5, padding: "2px 6px", color: C.text3, fontWeight: 500 }}>ID</span>
         </div>
-        <span style={{ fontWeight: 600, fontSize: 16, color: C.text }}>Translate Jawa</span>
-        <span style={{ fontSize: 11, border: `1px solid ${C.border}`, borderRadius: 5, padding: "2px 6px", color: C.text3, fontWeight: 500 }}>ID</span>
+
+        {/* ── Desktop nav links + theme toggle ── */}
+        <div className="nav-links-desktop" style={{ gap: 24, fontSize: 14, alignItems: "center" }}>
+          {NAV_LINKS.map(([label, p]) => (
+            <span key={p} onClick={() => navigate(p)} style={{
+              cursor: "pointer", color: page === p ? G : C.text2,
+              fontWeight: page === p ? 600 : 400, transition: "color 0.15s",
+            }}>{label}</span>
+          ))}
+
+          {/* Theme dropdown */}
+          <div style={{ position: "relative" }} onBlur={() => setTimeout(() => setShowThemeMenu(false), 150)}>
+            <button
+              onClick={() => setShowThemeMenu(o => !o)}
+              style={{
+                width: 34, height: 34, borderRadius: 8, border: `1.5px solid ${C.border}`,
+                background: C.bg2, cursor: "pointer", display: "flex",
+                alignItems: "center", justifyContent: "center", fontSize: 15,
+                color: C.text2, transition: "border-color 0.15s, background 0.2s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = G; e.currentTarget.style.color = G; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text2; }}
+            >
+              {isDark ? "🌙" : "☀️"}
+            </button>
+            {showThemeMenu && (
+              <div style={{
+                position: "absolute", top: "calc(100% + 8px)", right: 0, zIndex: 99,
+                background: C.bg, border: `1.5px solid ${C.border}`,
+                borderRadius: 12, boxShadow: `0 8px 24px ${C.shadow}`,
+                overflow: "hidden", minWidth: 130,
+              }}>
+                {ThemeOptions.map(([icon, label, t]) => (
+                  <div key={t} onClick={() => { setTheme(t); setShowThemeMenu(false); }}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 10,
+                      padding: "10px 16px", fontSize: 14, cursor: "pointer",
+                      color: isActive(t) ? G : C.text, fontWeight: isActive(t) ? 600 : 400,
+                      background: isActive(t) ? C.greenBg : "transparent",
+                    }}
+                    onMouseEnter={e => { if (!isActive(t)) e.currentTarget.style.background = C.bg2; }}
+                    onMouseLeave={e => { if (!isActive(t)) e.currentTarget.style.background = "transparent"; }}
+                  >
+                    <span>{icon}</span><span>{label}</span>
+                    {isActive(t) && <span style={{ marginLeft: "auto", color: G, fontSize: 12 }}>✓</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── Hamburger button (mobile only) ── */}
+        <button
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(o => !o)}
+          style={{
+            width: 38, height: 38, border: `1.5px solid ${C.border}`, borderRadius: 8,
+            background: C.bg2, cursor: "pointer",
+            flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 5,
+          }}
+          aria-label="Buka menu"
+        >
+          <span style={{ display: "block", width: 18, height: 2, background: C.text, borderRadius: 2, transition: "all 0.22s", transform: menuOpen ? "rotate(45deg) translateY(7px)" : "none" }} />
+          <span style={{ display: "block", width: 18, height: 2, background: C.text, borderRadius: 2, transition: "all 0.22s", opacity: menuOpen ? 0 : 1 }} />
+          <span style={{ display: "block", width: 18, height: 2, background: C.text, borderRadius: 2, transition: "all 0.22s", transform: menuOpen ? "rotate(-45deg) translateY(-7px)" : "none" }} />
+        </button>
       </div>
 
-      {/* Nav links + Theme toggle */}
-      <div style={{ display: "flex", gap: 24, fontSize: 14, alignItems: "center" }}>
-        {([["Translate","home"],["Blog","blog"],["Tentang","tentang"],["Kontak","kontak"]] as [string,string][]).map(([label,p]) => (
-          <span key={p} onClick={() => setPage(p)} style={{
-            cursor: "pointer", color: page === p ? G : C.text2,
-            fontWeight: page === p ? 600 : 400, transition: "color 0.15s",
-          }}>{label}</span>
-        ))}
-
-        {/* Theme toggle dropdown */}
-        <div style={{ position: "relative" }} onBlur={() => setTimeout(() => setShowThemeMenu(false), 150)}>
-          <button
-            onClick={() => setShowThemeMenu(o => !o)}
-            style={{
-              width: 34, height: 34, borderRadius: 8, border: `1.5px solid ${C.border}`,
-              background: C.bg2, cursor: "pointer", display: "flex",
-              alignItems: "center", justifyContent: "center", fontSize: 15,
-              color: C.text2, transition: "border-color 0.15s, background 0.2s",
+      {/* ── Mobile dropdown menu ── */}
+      {menuOpen && (
+        <div style={{
+          position: "absolute", top: "100%", left: "-1rem", right: "-1rem", zIndex: 200,
+          background: C.bg, borderTop: `1px solid ${C.border3}`,
+          borderBottom: `1px solid ${C.border3}`,
+          boxShadow: `0 8px 24px ${C.shadow}`,
+          animation: "fadeIn 0.15s ease",
+        }}>
+          {/* Nav links */}
+          {NAV_LINKS.map(([label, p]) => (
+            <div key={p} onClick={() => navigate(p)} style={{
+              padding: "15px 20px", fontSize: 15, cursor: "pointer",
+              color: page === p ? G : C.text, fontWeight: page === p ? 600 : 400,
+              borderLeft: page === p ? `3px solid ${G}` : "3px solid transparent",
+              background: "transparent", transition: "background 0.1s",
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = G; e.currentTarget.style.color = G; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text2; }}
-          >
-            {isDark ? "🌙" : "☀️"}
-          </button>
+              onMouseEnter={e => e.currentTarget.style.background = C.bg2}
+              onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+            >
+              {label}
+            </div>
+          ))}
 
-          {showThemeMenu && (
-            <div style={{
-              position: "absolute", top: "calc(100% + 8px)", right: 0, zIndex: 99,
-              background: C.bg, border: `1.5px solid ${C.border}`,
-              borderRadius: 12, boxShadow: `0 8px 24px ${C.shadow}`,
-              overflow: "hidden", minWidth: 130,
-            }}>
-              {([
-                ["☀️", "Terang", "light"],
-                ["🌙", "Gelap", "dark"],
-              ] as [string, string, "light"|"dark"][]).map(([icon, label, t]) => (
-                <div
-                  key={t}
-                  onClick={() => { setTheme(t); setShowThemeMenu(false); }}
+          {/* Theme toggle in mobile menu */}
+          <div style={{ borderTop: `1px solid ${C.border3}`, padding: "12px 20px 16px" }}>
+            <div style={{ fontSize: 11, color: C.text3, marginBottom: 10, fontWeight: 600, letterSpacing: "0.05em" }}>TAMPILAN</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              {ThemeOptions.map(([icon, label, t]) => (
+                <button key={t} onClick={() => { setTheme(t); setMenuOpen(false); }}
                   style={{
-                    display: "flex", alignItems: "center", gap: 10,
-                    padding: "10px 16px", fontSize: 14, cursor: "pointer",
-                    color: (isDark ? t==="dark" : t==="light") ? G : C.text,
-                    fontWeight: (isDark ? t==="dark" : t==="light") ? 600 : 400,
-                    background: (isDark ? t==="dark" : t==="light") ? C.greenBg : "transparent",
-                    transition: "background 0.1s",
+                    flex: 1, padding: "9px 0", fontSize: 13, borderRadius: 8, cursor: "pointer",
+                    border: `1.5px solid ${isActive(t) ? G : C.border}`,
+                    background: isActive(t) ? C.greenBg : "transparent",
+                    color: isActive(t) ? G : C.text2, fontWeight: isActive(t) ? 600 : 400,
                   }}
-                  onMouseEnter={e => { if (!((isDark ? t==="dark" : t==="light"))) e.currentTarget.style.background = C.bg2; }}
-                  onMouseLeave={e => { if (!((isDark ? t==="dark" : t==="light"))) e.currentTarget.style.background = "transparent"; }}
-                >
-                  <span>{icon}</span>
-                  <span>{label}</span>
-                  {(isDark ? t==="dark" : t==="light") && (
-                    <span style={{ marginLeft: "auto", color: G, fontSize: 12 }}>✓</span>
-                  )}
-                </div>
+                >{icon} {label}</button>
               ))}
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
