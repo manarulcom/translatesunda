@@ -34,7 +34,7 @@ export default function KontakPage() {
         </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 40, marginBottom: 72, alignItems: "start" }}>
+      <div className="kontak-grid" style={{ gap: 40, marginBottom: 72, alignItems: "start" }}>
         <div>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: C.text, margin: "0 0 20px" }}>Informasi Kontak</h2>
           {[

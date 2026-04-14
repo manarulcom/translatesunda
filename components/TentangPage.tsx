@@ -28,7 +28,7 @@ export default function TentangPage() {
         </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 72 }}>
+      <div className="grid-cols-4" style={{ gap: 16, marginBottom: 72 }}>
         {stats.map(s => (
           <div key={s.n} style={{ background: C.bg2, borderRadius: 14, padding: "28px 20px", textAlign: "center", border: `1px solid ${C.border2}` }}>
             <div style={{ fontSize: 36, fontWeight: 800, color: G, marginBottom: 8 }}>{s.n}</div>
@@ -37,7 +37,7 @@ export default function TentangPage() {
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center", marginBottom: 72 }}>
+      <div className="grid-cols-2-wide" style={{ gap: 48, alignItems: "center", marginBottom: 72 }}>
         <div>
           <h2 style={{ fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 16px" }}>Kenapa Translate Jawa Hadir?</h2>
           <p style={{ color: C.text2, lineHeight: 1.8, marginBottom: 16, fontSize: 15 }}>
@@ -63,7 +63,7 @@ export default function TentangPage() {
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 12px" }}>Nilai-Nilai Kami</h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div className="grid-cols-2" style={{ gap: 20 }}>
           {values.map(v => (
             <div key={v.title} style={{ background: C.bg, borderRadius: 14, padding: "24px 20px", border: `1.5px solid ${C.border2}` }}>
               <div style={{ fontSize: 28, marginBottom: 12 }}>{v.icon}</div>
