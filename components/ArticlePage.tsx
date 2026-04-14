@@ -1,0 +1,81 @@
+"use client";
+
+import { ARTICLES, Article } from "@/lib/articles";
+import { CAT_COLORS, G } from "@/lib/constants";
+import { useTheme, colors } from "@/lib/theme";
+
+function catStyle(c: string, isDark: boolean): React.CSSProperties {
+  const col = CAT_COLORS[c] || G;
+  return { background: col + (isDark ? "25" : "18"), color: col, fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 50, display: "inline-block" };
+}
+
+interface ArticlePageProps {
+  article: Article; setPage: (p: string) => void; setArticle: (a: Article) => void;
+}
+
+export default function ArticlePage({ article, setPage, setArticle }: ArticlePageProps) {
+  const { isDark } = useTheme();
+  const C = colors(isDark);
+  const related = ARTICLES.filter(a => a.slug !== article.slug && a.category === article.category).slice(0, 3);
+  const paragraphs = article.body.split("\n\n");
+
+  return (
+    <div style={{ paddingTop: 40 }}>
+      <button onClick={() => setPage("blog")}
+        style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: C.text2, background: "none", border: "none", cursor: "pointer", marginBottom: 32, padding: 0 }}>
+        ← Kembali ke Blog
+      </button>
+      <div style={{ maxWidth: 720, margin: "0 auto" }}>
+        <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+          <span style={catStyle(article.category, isDark)}>{article.category}</span>
+        </div>
+        <h1 style={{ fontSize: 36, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em", lineHeight: 1.2 }}>{article.title}</h1>
+        <div style={{ display: "flex", gap: 16, fontSize: 14, color: C.text3, marginBottom: 32, alignItems: "center" }}>
+          <span>{article.date}</span><span>·</span><span>{article.readTime} baca</span>
+        </div>
+        <div style={{ fontSize: 72, textAlign: "center", background: C.bg2, borderRadius: 16, padding: "32px 0", marginBottom: 40, border: `1px solid ${C.border2}` }}>
+          {article.cover}
+        </div>
+        <div style={{ fontSize: 17, color: C.text4, lineHeight: 1.85 }}>
+          {paragraphs.map((p, i) => {
+            if (p.startsWith("**") && p.endsWith("**"))
+              return <h3 key={i} style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "28px 0 12px" }}>{p.replace(/\*\*/g, "")}</h3>;
+            if (p.startsWith("- "))
+              return <ul key={i} style={{ paddingLeft: 20, margin: "0 0 16px" }}>{p.split("\n").map((l, j) => <li key={j} style={{ marginBottom: 6 }}>{l.replace("- ", "")}</li>)}</ul>;
+            const parts = p.split(/\*\*(.*?)\*\*/g);
+            return <p key={i} style={{ margin: "0 0 18px" }}>{parts.map((pt, j) => j%2===1 ? <strong key={j}>{pt}</strong> : pt)}</p>;
+          })}
+        </div>
+
+        {/* CTA */}
+        <div style={{ background: C.greenBg, borderRadius: 16, padding: "28px", border: `1px solid ${C.greenBorder}`, margin: "48px 0", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 12 }}>🌐</div>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 8px" }}>Mau coba translate bahasa Jawa langsung?</h3>
+          <p style={{ color: C.text2, fontSize: 14, margin: "0 0 20px" }}>Gunakan Translate Jawa secara gratis — Ngoko, Krama Lugu, dan Krama Alus.</p>
+          <button onClick={() => setPage("home")}
+            style={{ padding: "10px 28px", fontSize: 14, fontWeight: 500, borderRadius: 50, border: "none", background: `linear-gradient(135deg,${G},#0d8f6d)`, color: "#fff", cursor: "pointer", boxShadow: "0 4px 14px rgba(22,163,127,0.3)" }}>
+            Coba Sekarang →
+          </button>
+        </div>
+
+        {/* Related */}
+        {related.length > 0 && (
+          <div style={{ marginBottom: 64 }}>
+            <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 20px" }}>Artikel Terkait</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+              {related.map(a => (
+                <div key={a.slug} onClick={() => { setArticle(a); setPage("article"); window.scrollTo?.(0,0); }}
+                  style={{ background: C.bg2, borderRadius: 12, padding: 16, border: `1px solid ${C.border2}`, cursor: "pointer", transition: "background 0.15s" }}
+                  onMouseEnter={e => e.currentTarget.style.background = C.greenBg}
+                  onMouseLeave={e => e.currentTarget.style.background = C.bg2}>
+                  <div style={{ fontSize: 28, marginBottom: 8 }}>{a.cover}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: C.text, lineHeight: 1.4 }}>{a.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
