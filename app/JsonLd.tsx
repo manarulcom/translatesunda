@@ -31,11 +31,6 @@ const webApplicationSchema = {
     "Translate Indonesia ke Krama Alus",
     "Translate Jawa ke Indonesia",
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    ratingCount: "842"
-  },
   knowsAbout: [
     { "@type": "Thing", name: "Bahasa Jawa", sameAs: "https://id.wikipedia.org/wiki/Bahasa_Jawa" },
     { "@type": "Thing", name: "Ngoko", sameAs: "https://id.wikipedia.org/wiki/Ngoko" },
