@@ -138,7 +138,7 @@ export default function TranslatorBox({ fromLang, setFromLang, toLang, setToLang
             rows={6}
             style={{
               width: "100%", boxSizing: "border-box", resize: "none",
-              fontSize: 15, padding: "14px 16px", paddingBottom: 32, borderRadius: 10,
+              fontSize: 16, padding: "14px 16px", paddingBottom: 32, borderRadius: 10,
               border: overLimit ? "1.5px solid #f87171" : `1.5px solid ${C.border}`,
               color: C.text, outline: "none", lineHeight: 1.65, fontFamily: "inherit",
               background: C.inputBg, transition: "border-color 0.15s, background 0.2s",
@@ -159,7 +159,7 @@ export default function TranslatorBox({ fromLang, setFromLang, toLang, setToLang
         <div style={{
           background: C.bg2, borderRadius: 10, padding: "14px 16px",
           border: `1.5px solid ${C.border}`, minHeight: 150, position: "relative",
-          transition: "background 0.2s",
+          transition: "background 0.2s", textAlign: "left",
         }}>
           {loading ? (
             <div style={{ display: "flex", gap: 5, alignItems: "center", padding: "4px 0" }}>
@@ -171,7 +171,7 @@ export default function TranslatorBox({ fromLang, setFromLang, toLang, setToLang
             <p style={{ margin: 0, fontSize: 14, color: "#f87171", lineHeight: 1.6 }}>⚠️ {error}</p>
           ) : result ? (
             <>
-              <p className="fade-in" style={{ margin: 0, fontSize: 15, color: C.text, lineHeight: 1.65, whiteSpace: "pre-wrap", paddingBottom: 32, textAlign: "left" }}>
+              <p className="fade-in" style={{ margin: 0, fontSize: 16, color: C.text, lineHeight: 1.65, whiteSpace: "pre-wrap", paddingBottom: 32, textAlign: "left" }}>
                 {result}
               </p>
               <button
@@ -181,7 +181,7 @@ export default function TranslatorBox({ fromLang, setFromLang, toLang, setToLang
               </button>
             </>
           ) : (
-            <span style={{ color: C.text3, fontSize: 15 }}>Terjemahan</span>
+            <span style={{ color: C.text3, fontSize: 16 }}>Terjemahan</span>
           )}
         </div>
       </div>
