@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ARTICLES, CATEGORIES, Article } from "@/lib/articles";
 import { CAT_COLORS, G } from "@/lib/constants";
 import { Badge } from "@/components/TranslatorBox";
@@ -11,12 +12,7 @@ function catStyle(c: string, isDark: boolean): React.CSSProperties {
   return { background: col + (isDark ? "25" : "18"), color: col, fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 50, display: "inline-block" };
 }
 
-interface BlogPageProps {
-  setPage: (p: string) => void;
-  setArticle: (a: Article) => void;
-}
-
-export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
+export default function BlogPage() {
   const [cat, setCat] = useState("Semua");
   const [search, setSearch] = useState("");
   const { isDark } = useTheme();
@@ -27,8 +23,6 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
     (a.title.toLowerCase().includes(search.toLowerCase()) || a.excerpt.toLowerCase().includes(search.toLowerCase()))
   );
   const featured = ARTICLES[0];
-
-  function openArticle(a: Article) { setArticle(a); setPage("article"); }
 
   return (
     <div style={{ paddingTop: 48 }}>
@@ -44,8 +38,8 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
 
       {/* Featured */}
       {!search && cat === "Semua" && (
-        <div className="featured-article" onClick={() => openArticle(featured)}
-          style={{ background: C.greenBg, borderRadius: 20, padding: "36px", border: `1.5px solid ${C.greenBorder}`, marginBottom: 48, cursor: "pointer", transition: "background 0.2s" }}
+        <Link href={`/blog/${featured.slug}`} className="featured-article"
+          style={{ textDecoration: "none", display: "grid", background: C.greenBg, borderRadius: 20, padding: "36px", border: `1.5px solid ${C.greenBorder}`, marginBottom: 48, cursor: "pointer", transition: "background 0.2s" }}
           onMouseEnter={e => e.currentTarget.style.filter = "brightness(1.05)"}
           onMouseLeave={e => e.currentTarget.style.filter = "none"}
         >
@@ -59,7 +53,7 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
             <div style={{ fontSize: 13, color: C.text3 }}>{featured.date} · {featured.readTime} baca</div>
           </div>
           <div className="featured-emoji" style={{ fontSize: 72 }}>{featured.cover}</div>
-        </div>
+        </Link>
       )}
 
       {/* Categories */}
@@ -75,8 +69,8 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
       {/* Grid */}
       <div className="blog-grid">
         {filtered.map(a => (
-          <div key={a.slug} onClick={() => openArticle(a)}
-            style={{ background: C.bg, borderRadius: 14, border: `1.5px solid ${C.border2}`, overflow: "hidden", cursor: "pointer", transition: "box-shadow 0.2s, transform 0.2s" }}
+          <Link key={a.slug} href={`/blog/${a.slug}`}
+            style={{ textDecoration: "none", display: "block", background: C.bg, borderRadius: 14, border: `1.5px solid ${C.border2}`, overflow: "hidden", cursor: "pointer", transition: "box-shadow 0.2s, transform 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 8px 24px ${C.shadow}`; e.currentTarget.style.transform = "translateY(-2px)"; }}
             onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}>
             <div style={{ background: C.bg2, height: 100, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 48 }}>{a.cover}</div>
@@ -88,7 +82,7 @@ export default function BlogPage({ setPage, setArticle }: BlogPageProps) {
               <p style={{ fontSize: 13, color: C.text2, lineHeight: 1.6, margin: "0 0 14px" }}>{a.excerpt.substring(0, 100)}...</p>
               <div style={{ fontSize: 12, color: C.text3 }}>{a.date} · {a.readTime} baca</div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       {filtered.length === 0 && <div style={{ textAlign: "center", padding: "48px 0", color: C.text3 }}>Artikel tidak ditemukan.</div>}

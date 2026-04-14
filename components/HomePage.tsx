@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Link from "next/link";
 import TranslatorBox, { Badge } from "@/components/TranslatorBox";
 import { G, FEATURES, FAQS } from "@/lib/constants";
 import { useTheme, colors } from "@/lib/theme";
@@ -47,13 +48,10 @@ function MockCard({ f }: { f: (typeof FEATURES)[number] }) {
   );
 }
 
-interface HomePageProps {
-  fromLang: string; setFromLang: (v: string) => void;
-  toLang: string; setToLang: (v: string) => void;
-  setPage: (p: string) => void;
-}
+export default function HomePage() {
+  const [fromLang, setFromLang] = useState("");
+  const [toLang, setToLang] = useState("");
 
-export default function HomePage({ fromLang, setFromLang, toLang, setToLang, setPage }: HomePageProps) {
   const tRef = useRef<HTMLDivElement>(null);
   const { isDark } = useTheme();
   const C = colors(isDark);
@@ -138,10 +136,10 @@ export default function HomePage({ fromLang, setFromLang, toLang, setToLang, set
         <p style={{ color: C.text2, fontSize: 15, margin: "0 0 24px", maxWidth: 400, marginLeft: "auto", marginRight: "auto" }}>
           Artikel seputar budaya, sejarah, dan panduan belajar bahasa Jawa untuk semua kalangan.
         </p>
-        <button onClick={() => setPage("blog")}
-          style={{ padding: "11px 28px", fontSize: 14, fontWeight: 500, borderRadius: 50, border: "none", background: `linear-gradient(135deg,${G},#0d8f6d)`, color: "#fff", cursor: "pointer", boxShadow: "0 4px 14px rgba(22,163,127,0.3)" }}>
+        <Link href="/blog"
+          style={{ display: "inline-block", padding: "11px 28px", fontSize: 14, fontWeight: 500, borderRadius: 50, border: "none", background: `linear-gradient(135deg,${G},#0d8f6d)`, color: "#fff", cursor: "pointer", boxShadow: "0 4px 14px rgba(22,163,127,0.3)", textDecoration: "none" }}>
           Baca Blog →
-        </button>
+        </Link>
       </div>
     </div>
   );

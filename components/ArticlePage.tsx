@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ARTICLES, Article } from "@/lib/articles";
 import { CAT_COLORS, G } from "@/lib/constants";
 import { useTheme, colors } from "@/lib/theme";
@@ -9,11 +10,7 @@ function catStyle(c: string, isDark: boolean): React.CSSProperties {
   return { background: col + (isDark ? "25" : "18"), color: col, fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 50, display: "inline-block" };
 }
 
-interface ArticlePageProps {
-  article: Article; setPage: (p: string) => void; setArticle: (a: Article) => void;
-}
-
-export default function ArticlePage({ article, setPage, setArticle }: ArticlePageProps) {
+export default function ArticlePage({ article }: { article: Article }) {
   const { isDark } = useTheme();
   const C = colors(isDark);
   const related = ARTICLES.filter(a => a.slug !== article.slug && a.category === article.category).slice(0, 3);
@@ -21,10 +18,10 @@ export default function ArticlePage({ article, setPage, setArticle }: ArticlePag
 
   return (
     <div style={{ paddingTop: 40 }}>
-      <button onClick={() => setPage("blog")}
-        style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, color: C.text2, background: "none", border: "none", cursor: "pointer", marginBottom: 32, padding: 0 }}>
+      <Link href="/blog"
+        style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 14, color: C.text2, textDecoration: "none", marginBottom: 32 }}>
         ← Kembali ke Blog
-      </button>
+      </Link>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
           <span style={catStyle(article.category, isDark)}>{article.category}</span>
@@ -52,10 +49,10 @@ export default function ArticlePage({ article, setPage, setArticle }: ArticlePag
           <div style={{ fontSize: 32, marginBottom: 12 }}>🌐</div>
           <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 8px" }}>Mau coba translate bahasa Jawa langsung?</h3>
           <p style={{ color: C.text2, fontSize: 14, margin: "0 0 20px" }}>Gunakan Translate Jawa secara gratis — Ngoko, Krama Lugu, dan Krama Alus.</p>
-          <button onClick={() => setPage("home")}
-            style={{ padding: "10px 28px", fontSize: 14, fontWeight: 500, borderRadius: 50, border: "none", background: `linear-gradient(135deg,${G},#0d8f6d)`, color: "#fff", cursor: "pointer", boxShadow: "0 4px 14px rgba(22,163,127,0.3)" }}>
+          <Link href="/"
+            style={{ display: "inline-block", padding: "10px 28px", fontSize: 14, fontWeight: 500, borderRadius: 50, border: "none", background: `linear-gradient(135deg,${G},#0d8f6d)`, color: "#fff", cursor: "pointer", boxShadow: "0 4px 14px rgba(22,163,127,0.3)", textDecoration: "none" }}>
             Coba Sekarang →
-          </button>
+          </Link>
         </div>
 
         {/* Related */}
@@ -64,13 +61,13 @@ export default function ArticlePage({ article, setPage, setArticle }: ArticlePag
             <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 20px" }}>Artikel Terkait</h3>
             <div className="steps-grid" style={{ gap: 16 }}>
               {related.map(a => (
-                <div key={a.slug} onClick={() => { setArticle(a); setPage("article"); window.scrollTo?.(0,0); }}
-                  style={{ background: C.bg2, borderRadius: 12, padding: 16, border: `1px solid ${C.border2}`, cursor: "pointer", transition: "background 0.15s" }}
+                <Link key={a.slug} href={`/blog/${a.slug}`}
+                  style={{ textDecoration: "none", display: "block", background: C.bg2, borderRadius: 12, padding: 16, border: `1px solid ${C.border2}`, cursor: "pointer", transition: "background 0.15s" }}
                   onMouseEnter={e => e.currentTarget.style.background = C.greenBg}
                   onMouseLeave={e => e.currentTarget.style.background = C.bg2}>
                   <div style={{ fontSize: 28, marginBottom: 8 }}>{a.cover}</div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: C.text, lineHeight: 1.4 }}>{a.title}</div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

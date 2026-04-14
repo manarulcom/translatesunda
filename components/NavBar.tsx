@@ -1,24 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { G } from "@/lib/constants";
 import { useTheme, colors } from "@/lib/theme";
 
-interface NavBarProps {
-  page: string;
-  setPage: (p: string) => void;
-}
+const NAV_LINKS = [
+  ["Translate", "/"],
+  ["Blog", "/blog"],
+  ["Tentang", "/tentang"],
+  ["Kontak", "/kontak"]
+] as [string,string][];
 
-const NAV_LINKS = [["Translate","home"],["Blog","blog"],["Tentang","tentang"],["Kontak","kontak"]] as [string,string][];
-
-export default function NavBar({ page, setPage }: NavBarProps) {
+export default function NavBar() {
+  const pathname = usePathname();
   const { isDark, setTheme } = useTheme();
   const C = colors(isDark);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  function navigate(p: string) {
-    setPage(p);
+  function closeMenus() {
     setMenuOpen(false);
     setShowThemeMenu(false);
   }
@@ -32,22 +34,26 @@ export default function NavBar({ page, setPage }: NavBarProps) {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 0" }}>
 
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => navigate("home")}>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", textDecoration: "none" }} onClick={closeMenus}>
           <div style={{ width: 32, height: 32, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>
             <img src="/icon.png" alt="Translate Jawa" width={32} height={32} style={{ objectFit: "cover", display: "block" }} />
           </div>
           <span style={{ fontWeight: 600, fontSize: 16, color: C.text }}>Translate Jawa</span>
           <span style={{ fontSize: 11, border: `1px solid ${C.border}`, borderRadius: 5, padding: "2px 6px", color: C.text3, fontWeight: 500 }}>ID</span>
-        </div>
+        </Link>
 
         {/* ── Desktop nav links + theme toggle ── */}
         <div className="nav-links-desktop" style={{ gap: 24, fontSize: 14, alignItems: "center" }}>
-          {NAV_LINKS.map(([label, p]) => (
-            <span key={p} onClick={() => navigate(p)} style={{
-              cursor: "pointer", color: page === p ? G : C.text2,
-              fontWeight: page === p ? 600 : 400, transition: "color 0.15s",
-            }}>{label}</span>
-          ))}
+          {NAV_LINKS.map(([label, href]) => {
+            // match exactly for root, or startsWith for blog
+            const isActive = href === "/" ? pathname === "/" : pathname?.startsWith(href);
+            return (
+              <Link key={href} href={href} style={{
+                cursor: "pointer", color: isActive ? G : C.text2,
+                fontWeight: isActive ? 600 : 400, transition: "color 0.15s", textDecoration: "none"
+              }}>{label}</Link>
+            );
+          })}
 
           {/* Theme dropdown */}
           <div style={{ position: "relative" }} onBlur={() => setTimeout(() => setShowThemeMenu(false), 150)}>
@@ -118,19 +124,20 @@ export default function NavBar({ page, setPage }: NavBarProps) {
           animation: "fadeIn 0.15s ease",
         }}>
           {/* Nav links */}
-          {NAV_LINKS.map(([label, p]) => (
-            <div key={p} onClick={() => navigate(p)} style={{
-              padding: "15px 20px", fontSize: 15, cursor: "pointer",
-              color: page === p ? G : C.text, fontWeight: page === p ? 600 : 400,
-              borderLeft: page === p ? `3px solid ${G}` : "3px solid transparent",
-              background: "transparent", transition: "background 0.1s",
-            }}
-              onMouseEnter={e => e.currentTarget.style.background = C.bg2}
-              onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-            >
-              {label}
-            </div>
-          ))}
+          {NAV_LINKS.map(([label, href]) => {
+            const isActiveLink = href === "/" ? pathname === "/" : pathname?.startsWith(href);
+            return (
+              <Link key={href} href={href} onClick={closeMenus} style={{
+                display: "block", padding: "15px 20px", fontSize: 15, cursor: "pointer", textDecoration: "none",
+                color: isActiveLink ? G : C.text, fontWeight: isActiveLink ? 600 : 400,
+                borderLeft: isActiveLink ? `3px solid ${G}` : "3px solid transparent",
+                background: "transparent", transition: "background 0.1s",
+              }}
+              >
+                {label}
+              </Link>
+            );
+          })}
 
           {/* Theme toggle in mobile menu */}
           <div style={{ borderTop: `1px solid ${C.border3}`, padding: "12px 20px 16px" }}>
