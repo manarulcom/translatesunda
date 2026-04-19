@@ -874,21 +874,6 @@
       ></textarea>
     </div>
 
-    <!-- Toggle Papan Ketik Tab 1 -->
-    <div class="kb-toggle-row">
-      <label class="toggle" for="kb-toggle-1" aria-label="Tampilkan papan ketik aksara">
-        <input type="checkbox" id="kb-toggle-1" onchange="toggleKb('kb-1', this, 'out-aksara-1')">
-        <div class="toggle-track"></div>
-      </label>
-      <label for="kb-toggle-1" class="toggle-label">
-        ⌨️ Tampilkan Papan Ketik
-        <span class="toggle-hint">(sisipkan aksara ke output)</span>
-      </label>
-    </div>
-
-    <!-- Panel keyboard Tab 1 -->
-    <div class="kb-wrap hidden" id="kb-1"></div>
-
     <!-- Panah konversi -->
     <div class="arrow-row" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1020,6 +1005,21 @@
       ></textarea>
     </div>
 
+    <!-- Toggle Papan Ketik Tab 3 (sebelum output) -->
+    <div class="kb-toggle-row">
+      <label class="toggle" for="kb-toggle-3" aria-label="Tampilkan papan ketik aksara">
+        <input type="checkbox" id="kb-toggle-3" onchange="toggleKb('kb-3', this, 'in-aksara-balik')">
+        <div class="toggle-track"></div>
+      </label>
+      <label for="kb-toggle-3" class="toggle-label">
+        ⌨️ Tampilkan Papan Ketik
+        <span class="toggle-hint">(untuk memasukkan aksara ke input)</span>
+      </label>
+    </div>
+
+    <!-- Panel keyboard Tab 3 -->
+    <div class="kb-wrap hidden" id="kb-3"></div>
+
     <!-- Panah konversi -->
     <div class="arrow-row" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1054,21 +1054,6 @@
         readonly
       ></textarea>
     </div>
-
-    <!-- Toggle Papan Ketik Tab 3 -->
-    <div class="kb-toggle-row">
-      <label class="toggle" for="kb-toggle-3" aria-label="Tampilkan papan ketik aksara">
-        <input type="checkbox" id="kb-toggle-3" onchange="toggleKb('kb-3', this, 'in-aksara-balik')">
-        <div class="toggle-track"></div>
-      </label>
-      <label for="kb-toggle-3" class="toggle-label">
-        ⌨️ Tampilkan Papan Ketik
-        <span class="toggle-hint">(untuk memasukkan aksara ke input)</span>
-      </label>
-    </div>
-
-    <!-- Panel keyboard Tab 3 -->
-    <div class="kb-wrap hidden" id="kb-3"></div>
 
     <!-- Info tips -->
     <div style="margin-top:10px; padding:10px 14px; background:var(--hijau-l); border:1.5px solid var(--border-f); border-radius:var(--r-md); font-size:12.5px; color:var(--teks-2); line-height:1.6;">
@@ -1918,8 +1903,8 @@
     inp.value = contoh;
     onLatinInput();
 
-    // Contoh teks di Tab 3 (pakai output Tab 1 sebagai demo)
-    // Akan terisi otomatis jika user klik tab ke-3
+    // Render panduan saat page load karena default sudah terbuka
+    renderGuide();
 
     // Sinkronkan icon tema dengan kondisi saat ini
     _updateThemeIcon();
