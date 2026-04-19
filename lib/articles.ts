@@ -96,27 +96,191 @@ Kini bahasa Sunda menghadapi tantangan baru: bersaing dengan bahasa Indonesia da
     date: "29 Maret 2026",
     readTime: "8 menit",
     cover: "✍️",
-    excerpt: "Aksara Sunda atau Kaganga adalah sistem tulisan tradisional yang diakui UNESCO. Pelajari cara membacanya dari nol.",
-    body: `Aksara Sunda, yang juga dikenal sebagai Aksara Kaganga, adalah sistem tulisan abugida yang digunakan untuk menulis bahasa Sunda. Aksara ini telah diakui oleh UNESCO sebagai bagian dari warisan budaya dunia.
+    excerpt: "Aksara Sunda atau Kaganga adalah sistem tulisan tradisional yang diakui UNESCO. Pelajari cara membacanya dari nol, lengkap dengan Unicode dan cara transliterasi ke Latin.",
+    body: `Aksara Sunda, yang juga dikenal sebagai Aksara Kaganga, adalah sistem tulisan abugida yang digunakan untuk menulis bahasa Sunda. Aksara ini telah diakui oleh UNESCO sebagai bagian dari warisan budaya dunia dan sejak 2008 sudah dikodekan dalam standar Unicode internasional.
 
 **Sejarah Aksara Sunda**
-Aksara Sunda berkembang dari aksara Pallawa yang dibawa dari India melalui jalur perdagangan. Prasasti tertua bertulisan aksara Sunda berasal dari abad ke-7 Masehi.
+Aksara Sunda berkembang dari aksara Pallawa yang dibawa dari India melalui jalur perdagangan. Prasasti tertua bertulisan aksara Sunda berasal dari abad ke-7 Masehi, ditemukan di wilayah Kerajaan Sunda. Sampai abad ke-18, aksara ini aktif digunakan sebelum kemudian tergantikan oleh tulisan Latin di era kolonial.
 
 **Huruf-Huruf Dasar (Ngalagéna)**
-Aksara Sunda terdiri dari huruf konsonan dasar yang disebut ngalagéna:
-Ka Ga Nga — Ca Ja Nya — Ta Da Na — Pa Ba Ma — Ya Ra La — Wa Sa Ha
+Aksara Sunda terdiri dari huruf konsonan dasar yang disebut ngalagéna. Setiap huruf sudah mengandung bunyi vokal "a" di dalamnya:
 
-Setiap huruf memiliki bunyi konsonan yang diikuti vokal "a". Misalnya "Ka" dibaca seperti "ka", "Ga" seperti "ga", dan seterusnya.
+- Ka (ᮊ) Ga (ᮌ) Nga (ᮍ)
+- Ca (ᮎ) Ja (ᮏ) Nya (ᮑ)
+- Ta (ᮒ) Da (ᮓ) Na (ᮔ)
+- Pa (ᮕ) Ba (ᮘ) Ma (ᮙ)
+- Ya (ᮚ) Ra (ᮛ) La (ᮜ)
+- Wa (ᮝ) Sa (ᮞ) Ha (ᮠ)
 
-**Rarangkén (Tanda Baca)**
-Untuk mengubah bunyi vokal, digunakan rarangkén. Misalnya panghulu untuk bunyi "i", panyukú untuk bunyi "u", dan paneuleung untuk bunyi "eu".
+**Vokal Mandiri (Swara)**
+Ketika vokal berdiri sendiri di awal kata atau suku kata, digunakan huruf vokal mandiri: A (ᮃ), I (ᮄ), U (ᮅ), É (ᮆ), O (ᮇ), E (ᮈ), EU (ᮉ).
 
-**Cara Belajar Aksara Sunda**
-Mulailah dengan menghafal huruf-huruf dasar ngalagéna, kemudian pelajari rarangkén satu per satu. Praktik menulis secara rutin adalah kunci utama penguasaan aksara ini.
+**Rarangkén (Tanda Vokal)**
+Untuk mengubah bunyi vokal konsonan, digunakan rarangkén (tanda diakritik):
+- Panghulu untuk bunyi "i"
+- Panyukú untuk bunyi "u"
+- Pamepet untuk bunyi "e"
+- Paneuleung untuk bunyi "eu"
+- Pamaaeh (᮪) untuk mematikan vokal inherent
+
+**Coba Langsung di TranslateSunda.id**
+Kamu tidak perlu menghafal semua aksara sekaligus. Gunakan fitur transliterasi interaktif di [translatesunda.id/aksara](https://translatesunda.id/aksara) untuk langsung mencoba menulis teks Latin dan melihat hasilnya dalam Aksara Sunda, dilengkapi papan ketik on-screen dan panduan referensi lengkap.
 
 **Aksara Sunda di Era Modern**
-Sejak 2008, aksara Sunda telah resmi dikodekan dalam Unicode, memungkinkan penggunaannya di perangkat digital. Ini adalah langkah besar dalam upaya pelestarian aksara tradisional Sunda.`,
+Sejak 2008, aksara Sunda resmi terdaftar di Unicode block U+1B80–U+1BBF, memungkinkan penggunaannya di perangkat digital. Kini aksara Sunda bisa diketik di smartphone, ditampilkan di website, dan dilestarikan secara digital untuk generasi mendatang.`,
   },
+  {
+    slug: "transliterasi-aksara-sunda-ke-latin",
+    title: "Panduan Transliterasi Aksara Sunda ke Latin: Aturan dan Contoh Lengkap",
+    category: "Aksara",
+    date: "15 April 2026",
+    readTime: "7 menit",
+    cover: "🔤",
+    excerpt: "Bagaimana cara mengubah teks Aksara Sunda menjadi huruf Latin yang bisa dibaca? Pelajari aturan transliterasi standar beserta contohnya.",
+    body: `Transliterasi adalah proses mengubah sistem tulisan satu ke sistem tulisan lain tanpa mengubah bunyi. Untuk Aksara Sunda, transliterasi ke huruf Latin mengikuti aturan fonemik yang sudah distandardisasi. Berikut panduan lengkapnya.
+
+**Prinsip Dasar: Vokal Inherent**
+Setiap konsonan Aksara Sunda secara otomatis membawa bunyi vokal "a". Jadi, karakter ᮊ (Ka) dibaca "ka", ᮌ (Ga) dibaca "ga", dan seterusnya. Inilah yang disebut vokal inherent — tidak ditulis, namun selalu ada.
+
+**Mengubah Vokal dengan Rarangkén**
+Ketika konsonan harus dibaca dengan vokal selain "a", digunakan rarangkén (tanda diakritik):
+- ᮊᮤ → "ki" (Ka + Panghulu)
+- ᮊᮥ → "ku" (Ka + Panyukú)
+- ᮊᮨ → "ke" (Ka + Pamepet)
+- ᮊᮩ → "keu" (Ka + Paneuleung)
+- ᮊᮧ → "ko" (Ka + Pamintu)
+
+**Konsonan Akhir: Pamaaeh**
+Konsonan yang berada di akhir suku kata (tanpa vokal) ditulis dengan menambahkan pamaaeh (᮪):
+- ᮊ᮪ → "k" (bukan "ka")
+- Contoh: kata "bandung" = ᮘᮔ᮪ᮓᮥᮀ
+
+**Digraf dalam Bahasa Sunda**
+Beberapa bunyi Sunda menggunakan dua huruf Latin:
+- ᮍ → "ng" (satu karakter Aksara Sunda)
+- ᮑ → "ny" (satu karakter Aksara Sunda)
+- ᮉ → "eu" (vokal khas Sunda)
+
+**Coba Konversi Otomatis**
+Tidak perlu menghafal semua aturan ini sekarang. Kamu bisa menggunakan fitur **Aksara → Latin** di [translatesunda.id/aksara](https://translatesunda.id/aksara) — cukup tempel atau ketik teks Aksara Sunda, dan hasil Latin akan muncul otomatis!
+
+**Contoh Kalimat Lengkap**
+Kata "Sunda" dalam Aksara Sunda: ᮞᮥᮔ᮪ᮓ
+- ᮞ = Sa
+- ᮥ = rarangkén "u" → jadi "su"
+- ᮔ = Na
+- ᮪ = Pamaaeh → Na menjadi "n" (tanpa vokal)
+- ᮓ = Da (dengan vokal inherent "a")
+- Hasil: S-u-n-d-a = "Sunda" ✓`,
+  },
+  {
+    slug: "unicode-aksara-sunda-lengkap",
+    title: "Unicode Aksara Sunda U+1B80–U+1BBF: Daftar Karakter Lengkap",
+    category: "Aksara",
+    date: "12 April 2026",
+    readTime: "6 menit",
+    cover: "🖥️",
+    excerpt: "Aksara Sunda memiliki blok khusus di standar Unicode internasional. Kenali semua karakter dalam blok U+1B80–U+1BBF beserta fungsinya.",
+    body: `Sejak tahun 2008, Aksara Sunda resmi menjadi bagian dari standar Unicode internasional — standar pengkodean karakter yang digunakan oleh semua perangkat digital di seluruh dunia. Ini adalah pencapaian besar dalam digitalisasi aksara tradisional Nusantara.
+
+**Apa itu Unicode?**
+Unicode adalah standar universal yang memberikan nomor unik (codepoint) untuk setiap karakter di semua sistem tulisan di dunia. Berkat Unicode, Aksara Sunda bisa ditampilkan di smartphone, website, dokumen Word, dan semua platform digital secara konsisten.
+
+**Blok Aksara Sunda: U+1B80–U+1BBF**
+Aksara Sunda menempati blok Unicode dari U+1B80 hingga U+1BBF, total 64 karakter yang mencakup:
+
+**Tanda Bantu (U+1B80–U+1B82)**
+- U+1B80: Panyecek (ng~ / suara nasal)
+- U+1B81: Panglayar (-r akhir)
+- U+1B82: Pangwisad (-h akhir)
+
+**Vokal Mandiri (U+1B83–U+1B8B)**
+- U+1B83: A (ᮃ)
+- U+1B84: I (ᮄ)
+- U+1B85: U (ᮅ)
+- U+1B86: É / AE (ᮆ)
+- U+1B87: O (ᮇ)
+- U+1B88: E schwa (ᮈ)
+- U+1B89: EU (ᮉ)
+
+**Konsonan (U+1B8A–U+1BA0)**
+18 konsonan dasar dari Ka (ᮊ) hingga Ha (ᮠ), termasuk Nga (ᮍ) dan Nya (ᮑ) yang mewakili bunyi digraf.
+
+**Rarangkén Khusus (U+1BA1–U+1BA3)**
+- U+1BA1: Pamingkal (-ya-)
+- U+1BA2: Panyakra (-ra-)
+- U+1BA3: Panyiku (-wa-)
+
+**Rarangkén Vokal (U+1BA4–U+1BAB)**
+- U+1BA4: Panghulu (-i)
+- U+1BA5: Panyukú (-u)
+- U+1BA8: Pamepet (-e)
+- U+1BA9: Paneuleung (-eu)
+- U+1BAA: Pamaaeh / Pangkon (mematikan vokal)
+
+**Angka Sunda (U+1BB0–U+1BB9)**
+Aksara Sunda memiliki sistem angka sendiri dari 0 hingga 9.
+
+**Cara Menggunakan di Perangkatmu**
+Font yang mendukung Aksara Sunda antara lain: **Noto Sans Sundanese** (Google Fonts, gratis), Sundanese Unicode, dan beberapa font khusus daerah.
+
+Untuk langsung mencoba mengetik menggunakan seluruh karakter Unicode ini, kunjungi papan ketik on-screen di [translatesunda.id/aksara](https://translatesunda.id/aksara) — semua karakter U+1B80–U+1BBF tersedia dalam grid yang rapi dan mudah digunakan!`,
+  },
+  {
+    slug: "belajar-aksara-sunda-dari-nol",
+    title: "Belajar Aksara Sunda dari Nol: Metode Efektif untuk Pemula",
+    category: "Aksara",
+    date: "10 April 2026",
+    readTime: "9 menit",
+    cover: "📖",
+    excerpt: "Ingin bisa baca tulis Aksara Sunda tapi bingung mulai dari mana? Ikuti metode belajar bertahap ini dan kamu bisa membaca aksara dasar dalam 1 minggu.",
+    body: `Belajar Aksara Sunda tidak sesulit yang dibayangkan. Dengan metode yang tepat dan konsistensi, kamu bisa mulai membaca kata-kata sederhana dalam waktu singkat. Panduan ini dirancang khusus untuk pemula yang belum pernah mengenal aksara Sunda sama sekali.
+
+**Kenapa Belajar Aksara Sunda?**
+- Memahami warisan budaya leluhur Sunda
+- Bisa membaca prasasti, naskah, dan ornamen aksara di Jawa Barat  
+- Memperdalam pemahaman bahasa Sunda secara holistik
+- Keren dan unik — tidak banyak orang yang bisa melakukannya!
+
+**Minggu 1: Mengenal Vokal Mandiri (7 huruf)**
+Mulailah dengan vokal karena ini paling mudah dihafal:
+- ᮃ = a, ᮄ = i, ᮅ = u, ᮆ = é, ᮇ = o, ᮈ = e, ᮉ = eu
+
+Tip: Gunakan kartu flash (flashcard) dengan gambar aksara di depan dan bunyi di belakang.
+
+**Minggu 2: Konsonan Baris Pertama (Ka hingga Na)**
+Pelajari 9 konsonan pertama: ᮊ ᮌ ᮍ ᮎ ᮏ ᮑ ᮒ ᮓ ᮔ
+Ingat bahwa setiap konsonan sudah membawa bunyi "a". Jadi ᮊ bukan "k" tapi "ka".
+
+**Minggu 3: Konsonan Baris Kedua + Pamaaeh**
+Selesaikan sisa konsonan: ᮕ ᮘ ᮙ ᮚ ᮛ ᮜ ᮝ ᮞ ᮠ
+Pelajari juga pamaaeh (᮪) untuk mematikan vokal inherent.
+
+**Minggu 4: Rarangkén Vokal**
+Ini kunci untuk membaca kata-kata lengkap:
+- + panghulu → bunyi "i" (contoh: ᮊᮤ = ki)
+- + panyukú → bunyi "u" (contoh: ᮊᮥ = ku)
+- + pamepet → bunyi "e" (contoh: ᮊᮨ = ke)
+
+**Alat Bantu Belajar yang Direkomendasikan**
+Gunakan fitur interaktif di [translatesunda.id/aksara](https://translatesunda.id/aksara) untuk:
+- Mencoba mengetik aksara dengan papan ketik on-screen
+- Melihat transliterasi Latin → Aksara secara real-time
+- Menggunakan panduan referensi karakter lengkap sebagai kamus cepat
+
+**Latihan Harian (15 menit/hari)**
+1. Buka [translatesunda.id/aksara](https://translatesunda.id/aksara)
+2. Ketik kata-kata Sunda yang kamu kenal di kolom Latin
+3. Amati hasilnya dalam Aksara Sunda
+4. Coba hafalkan pola yang sering muncul
+
+**Target Realistis**
+- Minggu 1: Hafal 7 vokal mandiri
+- Minggu 2: Bisa membaca kata dengan konsonan Ka-Na
+- Minggu 3: Bisa membaca semua konsonan dasar + pamaaeh
+- Bulan 2: Bisa membaca kata-kata umum bahasa Sunda dalam aksara`,
+  },
+
   {
     slug: "paribasa-sunda-filosofi-hidup",
     title: "10 Paribasa Sunda yang Mengandung Filosofi Hidup Mendalam",
