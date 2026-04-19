@@ -22,28 +22,44 @@ const ratelimit = redis
       redis,
       limiter: Ratelimit.slidingWindow(10, "60 s"),
       analytics: true,
-      prefix: "translate-jawa",
+      prefix: "translatesunda",
     })
   : null;
 
 // ─── Validasi input ─────────────────────────────────────────────────────────
-const VALID_FROM = ["Indonesia", "Jawa"];
-const VALID_TO = ["Jawa Ngoko", "Krama Lugu", "Krama Alus", "Indonesia"];
+const VALID_FROM = ["Indonesia", "Sunda"];
+const VALID_TO   = ["Sunda Halus (Lemes)", "Sunda Sedang", "Sunda Kasar (Wantah)", "Indonesia"];
+const VALID_SUNDA_LEVELS = ["Sunda Halus (Lemes)", "Sunda Sedang", "Sunda Kasar (Wantah)"];
 const MAX_CHARS = 500;
 
-// ─── Build system prompt ────────────────────────────────────────────────────
-function buildSystemPrompt(fromLang: string, level: string): string {
-  if (fromLang === "Indonesia") {
-    return `Kamu adalah translator profesional bahasa Indonesia ke bahasa Jawa ${level}. Terjemahkan teks yang diberikan ke bahasa Jawa ${level}. PENTING: Berikan HANYA hasil terjemahan, tanpa penjelasan, tanpa catatan, tanpa tanda kutip tambahan.`;
-  }
-  return `Kamu adalah translator profesional bahasa Jawa ke bahasa Indonesia. Terjemahkan teks Jawa yang diberikan ke bahasa Indonesia yang natural dan baik. PENTING: Berikan HANYA hasil terjemahan, tanpa penjelasan, tanpa catatan, tanpa tanda kutip tambahan.`;
-}
-
-const LEVEL_MAP: Record<string, string> = {
-  "Jawa Ngoko": "ngoko",
-  "Krama Lugu": "krama lugu",
-  "Krama Alus": "krama alus",
+// ─── Label singkat tingkatan Sunda untuk dimasukkan ke prompt ───────────────
+const SUNDA_LEVEL_LABEL: Record<string, string> = {
+  "Sunda Halus (Lemes)": "Halus (Lemes)",
+  "Sunda Sedang":        "Sedang",
+  "Sunda Kasar (Wantah)": "Kasar (Wantah)",
 };
+
+// ─── Build system prompt ────────────────────────────────────────────────────
+function buildSystemPrompt(fromLang: string, toLang: string, sundaLevel?: string): string {
+  if (fromLang === "Indonesia") {
+    // Indonesia → Sunda: tingkatan ditentukan dari toLang
+    if (toLang === "Sunda Halus (Lemes)") {
+      return "Kamu adalah penerjemah profesional Bahasa Indonesia ke Bahasa Sunda. Terjemahkan teks berikut ke Bahasa Sunda HALUS (lemes). Balas hanya dengan hasil terjemahan, tanpa penjelasan tambahan.";
+    }
+    if (toLang === "Sunda Sedang") {
+      return "Kamu adalah penerjemah profesional Bahasa Indonesia ke Bahasa Sunda. Terjemahkan teks berikut ke Bahasa Sunda SEDANG (umum/sehari-hari). Balas hanya dengan hasil terjemahan, tanpa penjelasan tambahan.";
+    }
+    // Sunda Kasar (Wantah)
+    return "Kamu adalah penerjemah profesional Bahasa Indonesia ke Bahasa Sunda. Terjemahkan teks berikut ke Bahasa Sunda KASAR (wantah/informal). Balas hanya dengan hasil terjemahan, tanpa penjelasan tambahan.";
+  }
+
+  // Sunda → Indonesia: gunakan sundaLevel sebagai konteks tingkatan INPUT
+  const levelLabel = sundaLevel
+    ? (SUNDA_LEVEL_LABEL[sundaLevel] ?? "umum")
+    : "umum";
+
+  return `Kamu adalah penerjemah profesional Bahasa Sunda ke Bahasa Indonesia. Input adalah Bahasa Sunda tingkatan ${levelLabel}. Terjemahkan ke Bahasa Indonesia yang baik dan benar. Balas hanya dengan hasil terjemahan, tanpa penjelasan tambahan.`;
+}
 
 // ─── Handler ──────────────────────────────────────────────────────────────────
 export async function POST(request: NextRequest) {
@@ -74,10 +90,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Request tidak valid." }, { status: 400 });
     }
 
-    const { text, fromLang, toLang } = body as {
+    const { text, fromLang, toLang, sundaLevel } = body as {
       text?: string;
       fromLang?: string;
       toLang?: string;
+      sundaLevel?: string; // konteks tingkatan input saat Sunda → Indonesia
     };
 
     if (!text || typeof text !== "string" || !text.trim()) {
@@ -95,11 +112,16 @@ export async function POST(request: NextRequest) {
     if (!toLang || !VALID_TO.includes(toLang)) {
       return NextResponse.json({ error: "Bahasa tujuan tidak valid." }, { status: 400 });
     }
+    // Validasi sundaLevel hanya ketika Sunda → Indonesia
+    if (fromLang === "Sunda" && sundaLevel && !VALID_SUNDA_LEVELS.includes(sundaLevel)) {
+      return NextResponse.json({ error: "Tingkatan Sunda tidak valid." }, { status: 400 });
+    }
 
     // 3. Cek response cache
-    const cacheKey = `tj:${crypto
+    // Sertakan sundaLevel dalam hash agar cache berbeda per tingkatan
+    const cacheKey = `translatesunda:${crypto
       .createHash("sha256")
-      .update(`${fromLang}|${toLang}|${text.trim().toLowerCase()}`)
+      .update(`${fromLang}|${toLang}|${sundaLevel ?? ""}|${text.trim().toLowerCase()}`)
       .digest("hex")}`;
 
     if (redis) {
@@ -118,14 +140,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const level = LEVEL_MAP[toLang] ?? "";
-    const systemPrompt = buildSystemPrompt(fromLang, level);
+    const systemPrompt = buildSystemPrompt(fromLang, toLang, sundaLevel);
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,                    // ✅ API key aman, hanya di server
+        "x-api-key": apiKey,                         // ✅ API key aman, hanya di server
         "anthropic-version": "2023-06-01",
         "anthropic-beta": "prompt-caching-2024-07-31", // ✅ Prompt caching
       },

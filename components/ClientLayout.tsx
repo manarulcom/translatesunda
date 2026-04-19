@@ -27,7 +27,7 @@ function ClientLayoutInner({ children }: { children: React.ReactNode }) {
           color: C.text3,
           marginTop: 64,
         }}>
-          © 2026 BahasaJawa.id - Translate Bahasa Jawa.
+          © 2026 TranslateSunda.id - Translate Bahasa Sunda.
         </footer>
       </div>
     </div>

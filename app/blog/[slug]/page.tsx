@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ARTICLES } from "@/lib/articles";
 import ArticlePage from "@/components/ArticlePage";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://bahasajawa.id";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://translatesunda.id";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -62,12 +62,12 @@ export default async function Page({ params }: Props) {
     datePublished: new Date(article.date).toISOString(),
     author: [{
         "@type": "Organization",
-        name: "Translate Jawa",
+        name: "Translate Sunda",
         url: SITE_URL
     }],
     publisher: {
       "@type": "Organization",
-      name: "Translate Jawa",
+      name: "Translate Sunda",
       logo: {
         "@type": "ImageObject",
         url: `${SITE_URL}/icon.png`

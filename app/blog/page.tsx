@@ -1,17 +1,17 @@
 import { Metadata } from "next";
 import BlogPage from "@/components/BlogPage";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://bahasajawa.id";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://translatesunda.id";
 
 export const metadata: Metadata = {
-  title: "Blog Bahasa Jawa | Artikel, Sejarah, Panduan Belajar",
-  description: "Kumpulan artikel, tips, sejarah, dan panduan belajar seputar bahasa dan budaya Jawa.",
+  title: "Blog Bahasa Sunda | Artikel, Sejarah, Panduan Belajar",
+  description: "Kumpulan artikel, tips, sejarah, dan panduan belajar seputar bahasa dan budaya Sunda.",
   alternates: {
     canonical: `${SITE_URL}/blog`,
   },
   openGraph: {
-    title: "Blog Bahasa Jawa | Artikel, Sejarah, Panduan Belajar",
-    description: "Kumpulan artikel, tips, sejarah, dan panduan belajar seputar bahasa dan budaya Jawa.",
+    title: "Blog Bahasa Sunda | Artikel, Sejarah, Panduan Belajar",
+    description: "Kumpulan artikel, tips, sejarah, dan panduan belajar seputar bahasa dan budaya Sunda.",
     url: `${SITE_URL}/blog`,
   },
 };

@@ -3,33 +3,33 @@ import Script from "next/script";
 import "./globals.css";
 import JsonLd from "./JsonLd";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://bahasajawa.id";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://translatesunda.id";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "√ Translate Jawa ke Indonesia : Ngoko, Krama Lugu, Krama Alus",
-    template: "%s | Translate Jawa ke Indonesia",
+    default: "√ Translate Sunda ke Indonesia : Halus, Sedang, Kasar",
+    template: "%s | Translate Sunda ke Indonesia",
   },
   description:
-    "Translate Bahasa Jawa ke Indonesia atau Indonesia ke Bahasa Jawa dengan versi Ngoko, Krama Lugu, dan Krama Alus (Krama Inggil).",
+    "Translate Bahasa Sunda ke Indonesia atau Indonesia ke Bahasa Sunda dengan tingkatan Halus (Lemes), Sedang, dan Kasar (Wantah). Gratis dan berbasis AI.",
   keywords: [
-    "translate jawa",
-    "terjemah bahasa jawa",
-    "bahasa jawa ke indonesia",
-    "indonesia ke jawa",
-    "krama alus",
-    "krama lugu",
-    "jawa ngoko",
-    "translator bahasa jawa",
-    "translate jawa online",
-    "krama inggil",
+    "translate sunda",
+    "terjemah bahasa sunda",
+    "bahasa sunda ke indonesia",
+    "indonesia ke sunda",
+    "sunda halus",
+    "sunda lemes",
+    "sunda wantah",
+    "translator bahasa sunda",
+    "translate sunda online",
+    "undak usuk basa sunda",
   ],
 
-  authors: [{ name: "Translate Jawa" }],
-  creator: "Translate Jawa",
-  publisher: "Translate Jawa",
+  authors: [{ name: "Translate Sunda" }],
+  creator: "Translate Sunda",
+  publisher: "Translate Sunda",
 
   alternates: {
     canonical: "/",
@@ -39,27 +39,27 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     url: SITE_URL,
-    siteName: "Translate Jawa",
-    title: "√ Translate Jawa ke Indonesia : Ngoko, Krama Lugu, Krama Alus",
+    siteName: "Translate Sunda",
+    title: "√ Translate Sunda ke Indonesia : Halus, Sedang, Kasar",
     description:
-      "Translate Bahasa Jawa ke Indonesia atau Indonesia ke Bahasa Jawa dengan versi Ngoko, Krama Lugu, dan Krama Alus (Krama Inggil).",
+      "Translate Bahasa Sunda ke Indonesia atau Indonesia ke Bahasa Sunda dengan tingkatan Halus (Lemes), Sedang, dan Kasar (Wantah). Gratis dan berbasis AI.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Translate Jawa — Terjemahan Bahasa Jawa Online Gratis",
+        alt: "Translate Sunda — Terjemahan Bahasa Sunda Online Gratis",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "√ Translate Jawa ke Indonesia : Ngoko, Krama Lugu, Krama Alus",
+    title: "√ Translate Sunda ke Indonesia : Halus, Sedang, Kasar",
     description:
-      "Translate Bahasa Jawa ke Indonesia atau Indonesia ke Bahasa Jawa dengan versi Ngoko, Krama Lugu, dan Krama Alus (Krama Inggil).",
+      "Translate Bahasa Sunda ke Indonesia atau Indonesia ke Bahasa Sunda dengan tingkatan Halus (Lemes), Sedang, dan Kasar (Wantah).",
     images: ["/og-image.png"],
-    creator: "@bahasajawaid",
+    creator: "@translatesundaid",
   },
 
   robots: {
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     ],
   },
   verification: {
-    google: "On-s97fmEqILNE3_81aK_tduEriR4enmDt_VhGXONAk",
+    google: "_GK8gS6dCA4J2Oq9oIk6JErIuHo26DvhUgufxej3frI",
   },
 };
 
@@ -99,14 +99,14 @@ export default function RootLayout({
       <head>
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-ES9XHP1DSB"
+          src="https://www.googletagmanager.com/gtag/js?id=G-Y4646BYPHN"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-ES9XHP1DSB');
+            gtag('config', 'G-Y4646BYPHN');
           `}
         </Script>
       </head>

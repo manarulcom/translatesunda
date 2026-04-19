@@ -36,9 +36,9 @@ export default function NavBar() {
         {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", textDecoration: "none" }} onClick={closeMenus}>
           <div style={{ width: 32, height: 32, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>
-            <img src="/icon.png" alt="Translate Jawa" width={32} height={32} style={{ objectFit: "cover", display: "block" }} />
+            <img src="/icon.png" alt="Translate Sunda" width={32} height={32} style={{ objectFit: "cover", display: "block" }} />
           </div>
-          <span style={{ fontWeight: 600, fontSize: 16, color: C.text }}>Bahasa Jawa</span>
+          <span style={{ fontWeight: 600, fontSize: 16, color: C.text }}>Translate Sunda</span>
           <span style={{ fontSize: 11, border: `1px solid ${C.border}`, borderRadius: 5, padding: "2px 6px", color: C.text3, fontWeight: 500 }}>ID</span>
         </Link>
 

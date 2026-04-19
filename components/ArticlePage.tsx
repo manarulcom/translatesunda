@@ -47,8 +47,8 @@ export default function ArticlePage({ article }: { article: Article }) {
         {/* CTA */}
         <div style={{ background: C.greenBg, borderRadius: 16, padding: "28px", border: `1px solid ${C.greenBorder}`, margin: "48px 0", textAlign: "center" }}>
           <div style={{ fontSize: 32, marginBottom: 12 }}>🌐</div>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 8px" }}>Mau coba translate bahasa Jawa langsung?</h3>
-          <p style={{ color: C.text2, fontSize: 14, margin: "0 0 20px" }}>Gunakan Translate Jawa secara gratis — Ngoko, Krama Lugu, dan Krama Alus.</p>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 8px" }}>Mau coba translate bahasa Sunda langsung?</h3>
+          <p style={{ color: C.text2, fontSize: 14, margin: "0 0 20px" }}>Gunakan Translate Sunda secara gratis — Halus (Lemes), Sedang, dan Kasar (Wantah).</p>
           <Link href="/"
             style={{ display: "inline-block", padding: "10px 28px", fontSize: 14, fontWeight: 500, borderRadius: 50, border: "none", background: `linear-gradient(135deg,${G},#0d8f6d)`, color: "#fff", cursor: "pointer", boxShadow: "0 4px 14px rgba(22,163,127,0.3)", textDecoration: "none" }}>
             Coba Sekarang →

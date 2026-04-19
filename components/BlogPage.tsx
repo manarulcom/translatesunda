@@ -28,9 +28,9 @@ export default function BlogPage() {
     <div style={{ paddingTop: 48 }}>
       <div style={{ textAlign: "center", marginBottom: 48 }}>
         <Badge text="Blog" />
-        <h1 className="blog-h1" style={{ fontSize: 44, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em" }}>Artikel Bahasa Jawa</h1>
+        <h1 className="blog-h1" style={{ fontSize: 44, fontWeight: 800, color: C.text, margin: "0 0 16px", letterSpacing: "-0.02em" }}>Artikel Bahasa Sunda</h1>
         <p style={{ fontSize: 17, color: C.text2, maxWidth: 480, margin: "0 auto 28px", lineHeight: 1.8 }}>
-          Tips, panduan, sejarah, dan budaya seputar bahasa Jawa untuk semua kalangan.
+          Tips, panduan, sejarah, dan budaya seputar bahasa Sunda untuk semua kalangan.
         </p>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari artikel..."
           style={{ width: "100%", maxWidth: 400, padding: "10px 18px", fontSize: 14, borderRadius: 50, border: `1.5px solid ${C.border}`, outline: "none", boxSizing: "border-box", background: C.inputBg, color: C.text }} />

@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { ARTICLES } from "@/lib/articles";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://bahasajawa.id";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://translatesunda.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes: MetadataRoute.Sitemap = [

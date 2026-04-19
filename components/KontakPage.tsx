@@ -38,11 +38,11 @@ export default function KontakPage() {
         <div>
           <h2 style={{ fontSize: 20, fontWeight: 700, color: C.text, margin: "0 0 20px" }}>Informasi Kontak</h2>
           {[
-            { icon:"📧", title:"Email", val:"halo@bahasajawa.id", sub:"Kami balas dalam 1x24 jam", href:"mailto:halo@bahasajawa.id" },
-            { icon:"📸", title:"Instagram", val:"@bahasajawa.id", sub:"Follow untuk update terbaru", href:"https://instagram.com/bahasajawa.id" },
-            { icon:"𝕏", title:"X (Twitter)", val:"@bahasajawa.id", sub:"Untuk pertanyaan cepat", href:"https://x.com/bahasajawa.id" },
-            { icon:"📘", title:"Facebook", val:"@bahasajawa.id", sub:"Komunitas bahasa Jawa", href:"https://facebook.com/bahasajawa.id" },
-            { icon:"💼", title:"Kerjasama", val:"partner@bahasajawa.id", sub:"Untuk kolaborasi & bisnis", href:"mailto:partner@bahasajawa.id" },
+            { icon:"📧", title:"Email", val:"halo@translatesunda.id", sub:"Kami balas dalam 1x24 jam", href:"mailto:halo@translatesunda.id" },
+            { icon:"📸", title:"Instagram", val:"@translatesunda.id", sub:"Follow untuk update terbaru", href:"https://instagram.com/translatesunda.id" },
+            { icon:"𝕏", title:"X (Twitter)", val:"@translatesundaid", sub:"Untuk pertanyaan cepat", href:"https://x.com/translatesundaid" },
+            { icon:"📘", title:"Facebook", val:"@translatesunda.id", sub:"Komunitas bahasa Sunda", href:"https://facebook.com/translatesunda.id" },
+            { icon:"💼", title:"Kerjasama", val:"partner@translatesunda.id", sub:"Untuk kolaborasi & bisnis", href:"mailto:partner@translatesunda.id" },
           ].map(c => (
             <a key={c.title} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
               style={{ display: "flex", gap: 16, alignItems: "flex-start", marginBottom: 20, textDecoration: "none" }}>
