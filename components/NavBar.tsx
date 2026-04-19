@@ -8,6 +8,7 @@ import { useTheme, colors } from "@/lib/theme";
 
 const NAV_LINKS = [
   ["Translate", "/"],
+  ["Aksara", "/aksara"],
   ["Blog", "/blog"],
   ["Tentang", "/tentang"],
   ["Kontak", "/kontak"]
