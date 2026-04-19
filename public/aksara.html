@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Transliterasi Aksara Sunda online — konversi teks Latin ke Aksara Sunda atau ketik langsung menggunakan papan ketik on-screen. Gratis, berbasis Unicode.">
-  <meta name="keywords" content="aksara sunda, transliterasi sunda, huruf sunda, latin ke sunda, translate aksara sunda">
+  <meta name="description" content="Transliterasi Aksara Sunda online — konversi Latin ke Aksara Sunda, Aksara Sunda ke Latin, atau ketik langsung dengan papan ketik on-screen. Gratis, berbasis Unicode.">
+  <meta name="keywords" content="aksara sunda, transliterasi sunda, huruf sunda, latin ke sunda, sunda ke latin, translate aksara sunda">
   <meta property="og:title" content="Aksara Sunda — Transliterasi | TranslateSunda.id">
-  <meta property="og:description" content="Konversi teks Latin ke Aksara Sunda atau tulis langsung dengan papan ketik digital.">
+  <meta property="og:description" content="Konversi Latin ↔ Aksara Sunda bolak-balik, atau tulis langsung dengan papan ketik digital.">  
   <title>Aksara Sunda — Transliterasi | TranslateSunda.id</title>
 
   <!-- Google Fonts: Inter (UI) + Noto Sans Sundanese (aksara) -->
@@ -618,11 +618,11 @@
 ================================ -->
 <section class="hero">
   <h1>Aksara Sunda</h1>
-  <p class="hero-sub">Transliterasi teks Latin ke Aksara Sunda, atau tulis langsung menggunakan papan ketik digital on-screen</p>
+  <p class="hero-sub">Transliterasi Latin ↔ Aksara Sunda bolak-balik, atau tulis langsung menggunakan papan ketik digital on-screen</p>
   <div class="hero-badges">
     <span class="badge">✦ Unicode U+1B80–U+1BBF</span>
     <span class="badge">✦ Font Noto Sans Sundanese</span>
-    <span class="badge">✦ 3 Tingkatan Bahasa</span>
+    <span class="badge">✦ Latin ↔ Aksara</span>
   </div>
 </section>
 
@@ -639,7 +639,15 @@
       onclick="switchTab('latin')"
     >
       <span style="font-size:15px">Abc</span>
-      Latin → Aksara Sunda
+      Latin → Aksara
+    </button>
+    <button
+      class="tab-btn"
+      role="tab" id="tbtn-balik" aria-selected="false" aria-controls="tpanel-balik"
+      onclick="switchTab('balik')"
+    >
+      <span class="tab-icon">ᮃ</span>
+      Aksara → Latin
     </button>
     <button
       class="tab-btn"
@@ -647,7 +655,7 @@
       onclick="switchTab('aksara')"
     >
       <span class="tab-icon">ᮃ</span>
-      Tulis Aksara Sunda
+      Tulis Aksara
     </button>
   </div>
 
@@ -795,6 +803,98 @@
 
   </div>
   <!-- /TAB 2 -->
+
+  <!-- ============================
+       TAB 3: AKSARA → LATIN
+  ============================ -->
+  <div class="tab-panel" id="tpanel-balik" role="tabpanel" aria-labelledby="tbtn-balik">
+
+    <!-- Input Aksara Sunda -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-label">
+          <div class="label-dot"></div>
+          <span style="font-family:var(--font-snd); font-size:15px; color:var(--hijau)">ᮃᮊ᮪ᮞᮛ</span>
+          &nbsp;Input Aksara Sunda
+        </div>
+        <div class="card-actions">
+          <span class="counter" id="ctr-balik">0 / 5.000</span>
+          <button class="btn btn-red btn-icon" onclick="clearBalik()" title="Hapus semua" aria-label="Hapus semua teks aksara">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <textarea
+        class="ta ta-sunda"
+        id="in-aksara-balik"
+        maxlength="5000"
+        placeholder="Tempel atau ketik teks Aksara Sunda di sini… gunakan papan ketik di bawah untuk membantu"
+        aria-label="Input aksara Sunda untuk dikonversi ke Latin"
+        oninput="onBalikInput()"
+        rows="5"
+        spellcheck="false"
+      ></textarea>
+    </div>
+
+    <!-- Panah konversi -->
+    <div class="arrow-row" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <polyline points="19 12 12 19 5 12"/>
+      </svg>
+    </div>
+
+    <!-- Output Latin -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-label">
+          <div class="label-dot"></div>
+          Hasil Latin (Output)
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-copy" id="btn-copy-3" onclick="salin('out-latin-balik')" aria-label="Salin hasil teks Latin">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+            Salin
+          </button>
+        </div>
+      </div>
+      <textarea
+        class="ta"
+        id="out-latin-balik"
+        placeholder="Hasil teks Latin akan muncul otomatis di sini…"
+        aria-label="Output teks Latin hasil konversi"
+        rows="5"
+        spellcheck="false"
+        readonly
+      ></textarea>
+    </div>
+
+    <!-- Toggle Papan Ketik Tab 3 -->
+    <div class="kb-toggle-row">
+      <label class="toggle" for="kb-toggle-3" aria-label="Tampilkan papan ketik aksara">
+        <input type="checkbox" id="kb-toggle-3" onchange="toggleKb('kb-3', this, 'in-aksara-balik')">
+        <div class="toggle-track"></div>
+      </label>
+      <label for="kb-toggle-3" class="toggle-label">
+        ⌨️ Tampilkan Papan Ketik
+        <span class="toggle-hint">(untuk memasukkan aksara)</span>
+      </label>
+    </div>
+
+    <!-- Panel keyboard Tab 3 -->
+    <div class="kb-wrap hidden" id="kb-3"></div>
+
+    <!-- Info tips -->
+    <div style="margin-top:10px; padding:10px 14px; background:var(--hijau-l); border:1.5px solid var(--border-f); border-radius:var(--r-md); font-size:12.5px; color:var(--teks-2); line-height:1.6;">
+      💡 <strong>Tips:</strong> Paste teks Aksara Sunda dari sumber lain, atau gunakan papan ketik di atas untuk mengetik. Hasil romanisasi mengikuti konvensi transliterasi standar.
+    </div>
+
+  </div>
+  <!-- /TAB 3 -->
 
   <!-- ============================
        PANDUAN REFERENSI
@@ -1136,6 +1236,148 @@
   }
 
   /* =============================================
+     ALGORITMA REVERSE: AKSARA SUNDA → LATIN
+  ============================================= */
+
+  // Peta terbalik: karakter Aksara Sunda → string Latin
+  // Konsonan dasar → romanisasi tanpa vokal (vokal inherent 'a' ditangani saat konversi)
+  const PETA_BALIK_KONS = {};
+  // Ambil konsonan dari PETA_KONS (petakan char Aksara → Latin dasar)
+  // Kita pakai DATA_KONSONAN karena lebih bersih (1 karakter per entri)
+  const _KONS_LATIN_MAP = {
+    '\u1B8A': 'k',  '\u1B8B': 'q',  '\u1B8C': 'g',  '\u1B8D': 'ng',
+    '\u1B8E': 'c',  '\u1B8F': 'j',  '\u1B90': 'z',  '\u1B91': 'ny',
+    '\u1B92': 't',  '\u1B93': 'd',  '\u1B94': 'n',  '\u1B95': 'p',
+    '\u1B96': 'f',  '\u1B97': 'v',  '\u1B98': 'b',  '\u1B99': 'm',
+    '\u1B9A': 'y',  '\u1B9B': 'r',  '\u1B9C': 'l',  '\u1B9D': 'w',
+    '\u1B9E': 's',  '\u1B9F': 'x',  '\u1BA0': 'h',
+  };
+
+  // Vokal mandiri Aksara → Latin
+  const _VOK_MANDIRI_BALIK = {
+    '\u1B83': 'a',  '\u1B84': 'i',  '\u1B85': 'u',
+    '\u1B86': 'é',  '\u1B87': 'o',  '\u1B88': 'e',  '\u1B89': 'eu',
+  };
+
+  // Rarangkén vokal Aksara → Latin (menggantikan 'a' inherent)
+  const _RARANGKEN_BALIK = {
+    '\u1BA4': 'i',   // Panghulu
+    '\u1BA5': 'u',   // Panyuku
+    '\u1BA6': 'é',   // Panéléng
+    '\u1BA7': 'o',   // Pamintu
+    '\u1BA8': 'e',   // Pamepet
+    '\u1BA9': 'eu',  // Paneuleung
+    '\u1BAA': '',    // Pamaaeh — hapus vokal inherent
+    '\u1BAB': '',    // Virama — hapus vokal inherent
+    '\u1BA1': 'ya',  // Pamingkal — sisipkan ya setelah konsonan
+    '\u1BA2': 'ra',  // Panyakra — sisipkan ra setelah konsonan
+    '\u1BA3': 'wa',  // Panyiku — sisipkan wa setelah konsonan
+    '\u1B80': 'ng',  // Panyecek — sisipkan ng di akhir
+    '\u1B81': 'r',   // Panglayar — sisipkan r di akhir
+    '\u1B82': 'h',   // Pangwisad — sisipkan h di akhir
+  };
+
+  // Set semua karakter Aksara Sunda yang dikenal (untuk mendeteksi karakter asing)
+  const _SET_AKSARA = new Set([
+    ...Object.keys(_KONS_LATIN_MAP),
+    ...Object.keys(_VOK_MANDIRI_BALIK),
+    ...Object.keys(_RARANGKEN_BALIK),
+    ...Array.from({length:10}, (_, n) => String.fromCodePoint(0x1BB0+n)), // angka
+    ' ',
+  ]);
+
+  /**
+   * Konversi teks Aksara Sunda ke Latin.
+   * Algoritma:
+   *   1. Iterasi per karakter Unicode (Array.from)
+   *   2. Konsonan → simpan, lihat karakter berikutnya:
+   *      - Rarangkén    → output konsonan + vokal dari rarangkén, lewati 2
+   *      - Pamaaeh/Virama → output konsonan saja (tanpa vokal), lewati 2
+   *      - Bukan rarangkén → output konsonan + 'a' (inherent)
+   *   3. Vokal mandiri → output langsung
+   *   4. Angka Sunda → angka Latin
+   *   5. Lain         → diteruskan apa adanya
+   * @param {string} teks - Teks Aksara Sunda
+   * @returns {string} Teks Latin
+   */
+  function aksaraKeLatinFn(teks) {
+    if (!teks || !teks.trim()) return '';
+    const chars = Array.from(teks); // Pecah per codepoint Unicode
+    let hasil = '';
+    let i = 0;
+
+    while (i < chars.length) {
+      const ch = chars[i];
+      const cp = ch.codePointAt(0);
+
+      // --- Angka Sunda U+1BB0–U+1BB9 ---
+      if (cp >= 0x1BB0 && cp <= 0x1BB9) {
+        hasil += (cp - 0x1BB0).toString();
+        i++; continue;
+      }
+
+      // --- Vokal Mandiri ---
+      if (_VOK_MANDIRI_BALIK[ch] !== undefined) {
+        hasil += _VOK_MANDIRI_BALIK[ch];
+        i++; continue;
+      }
+
+      // --- Konsonan Dasar ---
+      if (_KONS_LATIN_MAP[ch] !== undefined) {
+        const konsLatin = _KONS_LATIN_MAP[ch];
+        const next = chars[i + 1];
+
+        if (next && _RARANGKEN_BALIK[next] !== undefined) {
+          // Ada rarangkén setelah konsonan
+          const vokLatin = _RARANGKEN_BALIK[next];
+          if (next === '\u1BAA' || next === '\u1BAB') {
+            // Pamaaeh / Virama: konsonan akhir suku kata, tanpa vokal
+            hasil += konsLatin;
+          } else if (next === '\u1BA1') {
+            // Pamingkal: konsonan + ya + a (misal kya)
+            hasil += konsLatin + 'ya';
+          } else if (next === '\u1BA2') {
+            // Panyakra: konsonan + ra + a (misal kra)
+            hasil += konsLatin + 'ra';
+          } else if (next === '\u1BA3') {
+            // Panyiku: konsonan + wa + a
+            hasil += konsLatin + 'wa';
+          } else if (next === '\u1B80') {
+            // Panyecek: konsonan + vokal inherent + ng
+            hasil += konsLatin + 'a' + 'ng';
+          } else if (next === '\u1B81') {
+            // Panglayar: konsonan + vokal inherent + r
+            hasil += konsLatin + 'a' + 'r';
+          } else if (next === '\u1B82') {
+            // Pangwisad: konsonan + vokal inherent + h
+            hasil += konsLatin + 'a' + 'h';
+          } else {
+            // Rarangkén vokal biasa (i, u, é, o, e, eu)
+            hasil += konsLatin + vokLatin;
+          }
+          i += 2; continue;
+        } else {
+          // Tidak ada rarangkén → vokal inherent 'a'
+          hasil += konsLatin + 'a';
+          i++; continue;
+        }
+      }
+
+      // --- Rarangkén tanpa konsonan sebelumnya (tepi kasus) ---
+      if (_RARANGKEN_BALIK[ch] !== undefined) {
+        // Abaikan rarangkén yang muncul tanpa konsonan
+        i++; continue;
+      }
+
+      // --- Karakter lain (spasi, tanda baca, huruf asing) ---
+      hasil += ch;
+      i++;
+    }
+
+    return hasil;
+  }
+
+  /* =============================================
      RENDER PAPAN KETIK ON-SCREEN
   ============================================= */
 
@@ -1289,6 +1531,22 @@
     updateCtr('out-aksara-2', 'ctr-aksara');
   }
 
+  /** Handler: user mengetik Aksara di Tab 3 (input untuk dikonversi ke Latin) */
+  function onBalikInput() {
+    const input  = document.getElementById('in-aksara-balik');
+    const output = document.getElementById('out-latin-balik');
+    updateCtr('in-aksara-balik', 'ctr-balik');
+    if (output) output.value = aksaraKeLatinFn(input.value);
+  }
+
+  /** Hapus semua teks di Tab 3 */
+  function clearBalik() {
+    const inp = document.getElementById('in-aksara-balik');
+    const out = document.getElementById('out-latin-balik');
+    if (inp) { inp.value = ''; inp.focus(); updateCtr('in-aksara-balik', 'ctr-balik'); }
+    if (out) out.value = '';
+  }
+
   /** Hapus semua teks di Tab 1 */
   function clearLatin() {
     const inp = document.getElementById('input-latin');
@@ -1319,7 +1577,7 @@
     tampilToast('✓ Teks berhasil disalin ke clipboard!', true);
 
     // Animasi tombol salin
-    const btnMap = { 'out-aksara-1': 'btn-copy-1', 'out-aksara-2': 'btn-copy-2' };
+    const btnMap = { 'out-aksara-1': 'btn-copy-1', 'out-aksara-2': 'btn-copy-2', 'out-latin-balik': 'btn-copy-3' };
     const btn = document.getElementById(btnMap[taId]);
     if (btn) {
       const asli = btn.innerHTML;
@@ -1353,8 +1611,9 @@
 
     if (wasReadonly) ta.setAttribute('readonly', '');
 
-    // Update counter jika Tab 2
+    // Update counter jika Tab 2 atau Tab 3
     if (targetId === 'out-aksara-2') updateCtr('out-aksara-2', 'ctr-aksara');
+    if (targetId === 'in-aksara-balik') { updateCtr('in-aksara-balik', 'ctr-balik'); onBalikInput(); }
   }
 
   /**
@@ -1390,6 +1649,7 @@
     if (wasReadonly) ta.setAttribute('readonly', '');
 
     if (targetId === 'out-aksara-2') updateCtr('out-aksara-2', 'ctr-aksara');
+    if (targetId === 'in-aksara-balik') { updateCtr('in-aksara-balik', 'ctr-balik'); onBalikInput(); }
   }
 
   /**
@@ -1457,16 +1717,22 @@
     document.getElementById('input-latin').value    = '';
     document.getElementById('out-aksara-1').value   = '';
     document.getElementById('out-aksara-2').value   = '';
+    document.getElementById('in-aksara-balik').value = '';
+    document.getElementById('out-latin-balik').value = '';
 
     // Update counter awal
     updateCtr('input-latin', 'ctr-latin');
     updateCtr('out-aksara-2', 'ctr-aksara');
+    updateCtr('in-aksara-balik', 'ctr-balik');
 
-    // Contoh teks otomatis untuk demo awal
+    // Contoh teks otomatis untuk demo awal (Tab 1)
     const contoh = 'Bahasa Sunda';
     const inp = document.getElementById('input-latin');
     inp.value = contoh;
     onLatinInput();
+
+    // Contoh teks di Tab 3 (pakai output Tab 1 sebagai demo)
+    // Akan terisi otomatis jika user klik tab ke-3
   });
 </script>
 </body>
