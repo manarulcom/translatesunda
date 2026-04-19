@@ -7,8 +7,7 @@ import { G } from "@/lib/constants";
 import { useTheme, colors } from "@/lib/theme";
 
 const NAV_LINKS = [
-  ["Translate", "/"],
-  ["Aksara", "/aksara"],
+  ["Aksara Sunda", "/aksara"],
   ["Blog", "/blog"],
   ["Tentang", "/tentang"],
   ["Kontak", "/kontak"]
@@ -18,16 +17,12 @@ export default function NavBar() {
   const pathname = usePathname();
   const { isDark, setTheme } = useTheme();
   const C = colors(isDark);
-  const [showThemeMenu, setShowThemeMenu] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   function closeMenus() {
     setMenuOpen(false);
-    setShowThemeMenu(false);
   }
 
-  const ThemeOptions = ([["☀️","Terang","light"],["🌙","Gelap","dark"]] as [string,string,"light"|"dark"][]);
-  const isActive = (t: "light"|"dark") => isDark ? t === "dark" : t === "light";
 
   return (
     <nav style={{ borderBottom: `1px solid ${C.border3}`, position: "relative" }}>
@@ -56,46 +51,22 @@ export default function NavBar() {
             );
           })}
 
-          {/* Theme dropdown */}
-          <div style={{ position: "relative" }} onBlur={() => setTimeout(() => setShowThemeMenu(false), 150)}>
-            <button
-              onClick={() => setShowThemeMenu(o => !o)}
-              style={{
-                width: 34, height: 34, borderRadius: 8, border: `1.5px solid ${C.border}`,
-                background: C.bg2, cursor: "pointer", display: "flex",
-                alignItems: "center", justifyContent: "center", fontSize: 15,
-                color: C.text2, transition: "border-color 0.15s, background 0.2s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = G; e.currentTarget.style.color = G; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text2; }}
-            >
-              {isDark ? "🌙" : "☀️"}
-            </button>
-            {showThemeMenu && (
-              <div style={{
-                position: "absolute", top: "calc(100% + 8px)", right: 0, zIndex: 99,
-                background: C.bg, border: `1.5px solid ${C.border}`,
-                borderRadius: 12, boxShadow: `0 8px 24px ${C.shadow}`,
-                overflow: "hidden", minWidth: 130,
-              }}>
-                {ThemeOptions.map(([icon, label, t]) => (
-                  <div key={t} onClick={() => { setTheme(t); setShowThemeMenu(false); }}
-                    style={{
-                      display: "flex", alignItems: "center", gap: 10,
-                      padding: "10px 16px", fontSize: 14, cursor: "pointer",
-                      color: isActive(t) ? G : C.text, fontWeight: isActive(t) ? 600 : 400,
-                      background: isActive(t) ? C.greenBg : "transparent",
-                    }}
-                    onMouseEnter={e => { if (!isActive(t)) e.currentTarget.style.background = C.bg2; }}
-                    onMouseLeave={e => { if (!isActive(t)) e.currentTarget.style.background = "transparent"; }}
-                  >
-                    <span>{icon}</span><span>{label}</span>
-                    {isActive(t) && <span style={{ marginLeft: "auto", color: G, fontSize: 12 }}>✓</span>}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Theme toggle */}
+          <button
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            className="theme-toggle"
+            aria-label="Toggle Dark Mode"
+            style={{
+              width: 34, height: 34, borderRadius: 8, border: `1.5px solid ${C.border}`,
+              background: C.bg2, cursor: "pointer", display: "flex",
+              alignItems: "center", justifyContent: "center", fontSize: 15,
+              color: C.text2, transition: "border-color 0.15s, background 0.2s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = G; e.currentTarget.style.color = G; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text2; }}
+          >
+            {isDark ? "☀️" : "🌙"}
+          </button>
         </div>
 
         {/* ── Hamburger button (mobile only) ── */}
@@ -144,16 +115,16 @@ export default function NavBar() {
           <div style={{ borderTop: `1px solid ${C.border3}`, padding: "12px 20px 16px" }}>
             <div style={{ fontSize: 11, color: C.text3, marginBottom: 10, fontWeight: 600, letterSpacing: "0.05em" }}>TAMPILAN</div>
             <div style={{ display: "flex", gap: 8 }}>
-              {ThemeOptions.map(([icon, label, t]) => (
-                <button key={t} onClick={() => { setTheme(t); setMenuOpen(false); }}
-                  style={{
-                    flex: 1, padding: "9px 0", fontSize: 13, borderRadius: 8, cursor: "pointer",
-                    border: `1.5px solid ${isActive(t) ? G : C.border}`,
-                    background: isActive(t) ? C.greenBg : "transparent",
-                    color: isActive(t) ? G : C.text2, fontWeight: isActive(t) ? 600 : 400,
-                  }}
-                >{icon} {label}</button>
-              ))}
+              <button onClick={() => { setTheme(isDark ? "light" : "dark"); setMenuOpen(false); }}
+                style={{
+                  flex: 1, padding: "9px 0", fontSize: 13, borderRadius: 8, cursor: "pointer",
+                  border: `1.5px solid ${C.border}`,
+                  background: C.bg2,
+                  color: C.text2, fontWeight: 600, display: "flex", alignItems: "center", justifyContent: "center", gap: 8
+                }}
+              >
+                {isDark ? "☀️ Mode Terang" : "🌙 Mode Gelap"}
+              </button>
             </div>
           </div>
         </div>
