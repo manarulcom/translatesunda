@@ -742,8 +742,9 @@
       .key { min-width: 40px; height: 42px; }
       .key-c { font-size: 17px; }
       .guide-grid { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); }
-      .tabs { border-radius: var(--r-md); }
-      .tab-btn { font-size: 13px; padding: 9px 10px; }
+      .tabs { border-radius: var(--r-md); padding: 3px; }
+      .tab-btn { font-size: 12px; padding: 10px 6px; gap: 4px; flex-direction: column; min-height: 52px; }
+      .tab-btn span { font-size: 18px !important; }
     }
     @media (max-width: 380px) {
       .key { min-width: 34px; height: 38px; }
@@ -774,13 +775,6 @@
      NAVBAR
 ================================ -->
 <nav class="navbar">
-  <a href="https://translatesunda.id" class="nav-back" aria-label="Kembali ke TranslateSunda.id">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 12H5M12 19l-7-7 7-7"/>
-    </svg>
-    translatesunda.id
-  </a>
-  <div class="nav-sep"></div>
   <a href="https://translatesunda.id/aksara" class="nav-brand">
     <div class="nav-logo">ᮃ</div>
     Aksara Sunda
@@ -880,6 +874,21 @@
       ></textarea>
     </div>
 
+    <!-- Toggle Papan Ketik Tab 1 -->
+    <div class="kb-toggle-row">
+      <label class="toggle" for="kb-toggle-1" aria-label="Tampilkan papan ketik aksara">
+        <input type="checkbox" id="kb-toggle-1" onchange="toggleKb('kb-1', this, 'out-aksara-1')">
+        <div class="toggle-track"></div>
+      </label>
+      <label for="kb-toggle-1" class="toggle-label">
+        ⌨️ Tampilkan Papan Ketik
+        <span class="toggle-hint">(sisipkan aksara ke output)</span>
+      </label>
+    </div>
+
+    <!-- Panel keyboard Tab 1 -->
+    <div class="kb-wrap hidden" id="kb-1"></div>
+
     <!-- Panah konversi -->
     <div class="arrow-row" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -915,21 +924,6 @@
         readonly
       ></textarea>
     </div>
-
-    <!-- Toggle Papan Ketik Tab 1 -->
-    <div class="kb-toggle-row">
-      <label class="toggle" for="kb-toggle-1" aria-label="Tampilkan papan ketik aksara">
-        <input type="checkbox" id="kb-toggle-1" onchange="toggleKb('kb-1', this, 'out-aksara-1')">
-        <div class="toggle-track"></div>
-      </label>
-      <label for="kb-toggle-1" class="toggle-label">
-        ⌨️ Tampilkan Papan Ketik
-        <span class="toggle-hint">(sisipkan aksara ke output)</span>
-      </label>
-    </div>
-
-    <!-- Panel keyboard Tab 1 -->
-    <div class="kb-wrap hidden" id="kb-1"></div>
 
   </div>
   <!-- /TAB 1 -->
@@ -1069,7 +1063,7 @@
       </label>
       <label for="kb-toggle-3" class="toggle-label">
         ⌨️ Tampilkan Papan Ketik
-        <span class="toggle-hint">(untuk memasukkan aksara)</span>
+        <span class="toggle-hint">(untuk memasukkan aksara ke input)</span>
       </label>
     </div>
 
@@ -1094,10 +1088,10 @@
 
   <div class="guide-wrap">
     <button
-      class="guide-btn"
+      class="guide-btn open"
       id="guide-btn"
       onclick="toggleGuide()"
-      aria-expanded="false"
+      aria-expanded="true"
       aria-controls="guide-body"
     >
       <span>📖 Panduan Transliterasi &amp; Referensi Aksara Sunda</span>
@@ -1105,7 +1099,7 @@
         <polyline points="6 9 12 15 18 9"/>
       </svg>
     </button>
-    <div class="guide-body" id="guide-body">
+    <div class="guide-body open" id="guide-body">
 
       <!-- Mini tabs panduan -->
       <div class="gtabs">
