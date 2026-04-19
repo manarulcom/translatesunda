@@ -195,15 +195,20 @@
     .navbar {
       background: var(--putih);
       border-bottom: 1px solid var(--border);
-      padding: 0 20px;
+      padding: 0 16px;
       height: 58px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: var(--shadow-xs);
+    }
+    .nav-inner {
+      max-width: 840px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
     .nav-back {
       display: flex;
@@ -775,24 +780,26 @@
      NAVBAR
 ================================ -->
 <nav class="navbar">
-  <a href="https://translatesunda.id/aksara" class="nav-brand">
-    <div class="nav-logo">ᮃ</div>
-    Aksara Sunda
-  </a>
+  <div class="nav-inner">
+    <a href="https://translatesunda.id/aksara" class="nav-brand">
+      <div class="nav-logo">ᮃ</div>
+      Aksara Sunda
+    </a>
 
-  <!-- Spacer -->
-  <div class="nav-spacer"></div>
+    <!-- Spacer -->
+    <div class="nav-spacer"></div>
 
-  <!-- Tombol Terang/Gelap -->
-  <button
-    class="btn-theme"
-    id="btn-theme"
-    onclick="toggleTheme()"
-    aria-label="Ganti mode tampilan"
-    title="Ganti mode terang/gelap"
-  >
-    <span id="theme-icon">☀️</span>
-  </button>
+    <!-- Tombol Terang/Gelap -->
+    <button
+      class="btn-theme"
+      id="btn-theme"
+      onclick="toggleTheme()"
+      aria-label="Ganti mode tampilan"
+      title="Ganti mode terang/gelap"
+    >
+      <span id="theme-icon">☀️</span>
+    </button>
+  </div>
 </nav>
 
 <!-- ================================
