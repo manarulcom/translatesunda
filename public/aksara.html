@@ -831,14 +831,6 @@
       <span class="tab-icon">ᮃ</span>
       Aksara → Latin
     </button>
-    <button
-      class="tab-btn"
-      role="tab" id="tbtn-aksara" aria-selected="false" aria-controls="tpanel-aksara"
-      onclick="switchTab('aksara')"
-    >
-      <span class="tab-icon">ᮃ</span>
-      Tulis Aksara
-    </button>
   </div>
 
   <!-- ============================
@@ -912,64 +904,6 @@
 
   </div>
   <!-- /TAB 1 -->
-
-  <!-- ============================
-       TAB 2: TULIS AKSARA LANGSUNG
-  ============================ -->
-  <div class="tab-panel" id="tpanel-aksara" role="tabpanel" aria-labelledby="tbtn-aksara">
-
-    <!-- Area Tulis Aksara -->
-    <div class="card">
-      <div class="card-head">
-        <div class="card-label">
-          <div class="label-dot"></div>
-          <span style="font-family:var(--font-snd); font-size:15px; color:var(--hijau)">ᮞᮥᮔ᮪ᮓ</span>
-          &nbsp;Area Tulis Aksara Sunda
-        </div>
-        <div class="card-actions">
-          <span class="counter" id="ctr-aksara">0 / 5.000</span>
-          <button class="btn btn-copy" id="btn-copy-2" onclick="salin('out-aksara-2')" aria-label="Salin teks aksara">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-            </svg>
-            Salin
-          </button>
-          <button class="btn btn-red btn-icon" onclick="clearAksara()" title="Hapus semua" aria-label="Hapus semua teks aksara">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <textarea
-        class="ta ta-sunda"
-        id="out-aksara-2"
-        maxlength="5000"
-        placeholder="Gunakan papan ketik di bawah atau paste teks Aksara Sunda langsung di sini…"
-        aria-label="Area tulis aksara Sunda"
-        oninput="onAksara2Input()"
-        rows="6"
-        spellcheck="false"
-      ></textarea>
-    </div>
-
-    <!-- Toggle Papan Ketik Tab 2 -->
-    <div class="kb-toggle-row">
-      <label class="toggle" for="kb-toggle-2" aria-label="Tampilkan papan ketik aksara">
-        <input type="checkbox" id="kb-toggle-2" onchange="toggleKb('kb-2', this, 'out-aksara-2')">
-        <div class="toggle-track"></div>
-      </label>
-      <label for="kb-toggle-2" class="toggle-label">
-        ⌨️ Tampilkan Papan Ketik
-        <span class="toggle-hint">(default: OFF)</span>
-      </label>
-    </div>
-
-    <!-- Panel keyboard Tab 2 -->
-    <div class="kb-wrap hidden" id="kb-2"></div>
-
-  </div>
-  <!-- /TAB 2 -->
 
   <!-- ============================
        TAB 3: AKSARA → LATIN
@@ -1894,7 +1828,6 @@
 
     // Update counter awal
     updateCtr('input-latin', 'ctr-latin');
-    updateCtr('out-aksara-2', 'ctr-aksara');
     updateCtr('in-aksara-balik', 'ctr-balik');
 
     // Contoh teks otomatis untuk demo awal (Tab 1)
