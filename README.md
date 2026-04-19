@@ -32,8 +32,8 @@ Platform terjemahan Bahasa Sunda ↔ Indonesia berbasis AI, dibangun dengan Next
 
 ```bash
 # Clone repo
-git clone https://github.com/manarul/bahasajawa.git
-cd bahasajawa
+git clone https://github.com/manarulcom/translatesunda.git
+cd translatesunda
 
 # Install dependencies
 npm install
