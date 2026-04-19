@@ -12,10 +12,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      // Halaman Aksara Sunda — fitur utama, priority tinggi
+      // Catatan: file ini adalah /public/aksara.html yang di-rewrite ke /aksara via next.config.ts
+      url: `${SITE_URL}/aksara`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${SITE_URL}/tentang`,
@@ -34,8 +42,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const articleRoutes: MetadataRoute.Sitemap = ARTICLES.map((article) => ({
     url: `${SITE_URL}/blog/${article.slug}`,
     lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
+    changeFrequency: "monthly" as const,
+    // Artikel Aksara dapat priority lebih tinggi karena relevan dengan halaman /aksara
+    priority: article.category === "Aksara" ? 0.85 : 0.75,
   }));
 
   return [...routes, ...articleRoutes];
