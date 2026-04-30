@@ -53,23 +53,25 @@ export default function NavBar() {
             );
           })}
 
-          {/* Theme toggle */}
-          <button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="theme-toggle"
-            aria-label="Toggle Dark Mode"
-            style={{
-              width: 34, height: 34, borderRadius: 8, border: `1.5px solid ${C.border}`,
-              background: C.bg2, cursor: "pointer", display: "flex",
-              alignItems: "center", justifyContent: "center", fontSize: 15,
-              color: C.text2, transition: "border-color 0.15s, background 0.2s",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = G; e.currentTarget.style.color = G; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text2; }}
-          >
-            {isDark ? "☀️" : "🌙"}
-          </button>
-        </div>
+          {/* Theme toggle — inside ul as a list item for proper flex alignment */}
+          <li>
+            <button
+              onClick={() => setTheme(isDark ? "light" : "dark")}
+              className="theme-toggle"
+              aria-label="Toggle Dark Mode"
+              style={{
+                width: 34, height: 34, borderRadius: 8, border: `1.5px solid ${C.border}`,
+                background: C.bg2, cursor: "pointer", display: "flex",
+                alignItems: "center", justifyContent: "center", fontSize: 15,
+                color: C.text2, transition: "border-color 0.15s, background 0.2s",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = G; e.currentTarget.style.color = G; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text2; }}
+            >
+              {isDark ? "☀️" : "🌙"}
+            </button>
+          </li>
+        </ul>
 
         {/* ── Hamburger button (mobile only) ── */}
         <button
