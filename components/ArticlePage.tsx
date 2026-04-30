@@ -69,18 +69,19 @@ export default function ArticlePage({ article }: { article: Article }) {
             // Table (| col | col |)
             if (p.startsWith("|")) {
               const rows = p.split("\n").filter(r => !r.match(/^\|[-| ]+\|$/));
+              const cellStyle: React.CSSProperties = { border: `1px solid ${C.border2}`, padding: "8px 12px", textAlign: "left" };
               return (
                 <div key={i} style={{ overflowX: "auto", margin: "0 0 18px" }}>
                   <table style={{ borderCollapse: "collapse", width: "100%", fontSize: 15 }}>
                     <tbody>
                       {rows.map((row, ri) => {
                         const cells = row.split("|").filter((_, ci) => ci > 0 && ci < row.split("|").length - 1);
-                        const Tag = ri === 0 ? "th" : "td";
                         return (
                           <tr key={ri}>
-                            {cells.map((cell, ci) => (
-                              <Tag key={ci} style={{ border: `1px solid ${C.border2}`, padding: "8px 12px", textAlign: "left", fontWeight: ri === 0 ? 700 : 400, background: ri === 0 ? C.bg2 : "transparent", color: C.text }}>{cell.trim()}</Tag>
-                            ))}
+                            {cells.map((cell, ci) => ri === 0
+                              ? <th key={ci} style={{ ...cellStyle, fontWeight: 700, background: C.bg2, color: C.text }}>{cell.trim()}</th>
+                              : <td key={ci} style={{ ...cellStyle, fontWeight: 400, background: "transparent", color: C.text }}>{cell.trim()}</td>
+                            )}
                           </tr>
                         );
                       })}
