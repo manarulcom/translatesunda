@@ -39,15 +39,17 @@ export default function NavBar() {
         </Link>
 
         {/* ── Desktop nav links + theme toggle ── */}
-        <div className="nav-links-desktop" style={{ gap: 24, fontSize: 14, alignItems: "center" }}>
+        <ul className="nav-links-desktop" style={{ display: "flex", listStyle: "none", margin: 0, padding: 0, gap: 24, fontSize: 14, alignItems: "center" }}>
           {NAV_LINKS.map(([label, href]) => {
             // match exactly for root, or startsWith for blog
             const isActive = href === "/" ? pathname === "/" : pathname?.startsWith(href);
             return (
-              <Link key={href} href={href} style={{
-                cursor: "pointer", color: isActive ? G : C.text2,
-                fontWeight: isActive ? 600 : 400, transition: "color 0.15s", textDecoration: "none"
-              }}>{label}</Link>
+              <li key={href}>
+                <Link href={href} style={{
+                  cursor: "pointer", color: isActive ? G : C.text2,
+                  fontWeight: isActive ? 600 : 400, transition: "color 0.15s", textDecoration: "none"
+                }}>{label}</Link>
+              </li>
             );
           })}
 
@@ -96,20 +98,24 @@ export default function NavBar() {
           animation: "fadeIn 0.15s ease",
         }}>
           {/* Nav links */}
-          {NAV_LINKS.map(([label, href]) => {
-            const isActiveLink = href === "/" ? pathname === "/" : pathname?.startsWith(href);
-            return (
-              <Link key={href} href={href} onClick={closeMenus} style={{
-                display: "block", padding: "15px 20px", fontSize: 15, cursor: "pointer", textDecoration: "none",
-                color: isActiveLink ? G : C.text, fontWeight: isActiveLink ? 600 : 400,
-                borderLeft: isActiveLink ? `3px solid ${G}` : "3px solid transparent",
-                background: "transparent", transition: "background 0.1s",
-              }}
-              >
-                {label}
-              </Link>
-            );
-          })}
+          <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+            {NAV_LINKS.map(([label, href]) => {
+              const isActiveLink = href === "/" ? pathname === "/" : pathname?.startsWith(href);
+              return (
+                <li key={href}>
+                  <Link href={href} onClick={closeMenus} style={{
+                    display: "block", padding: "15px 20px", fontSize: 15, cursor: "pointer", textDecoration: "none",
+                    color: isActiveLink ? G : C.text, fontWeight: isActiveLink ? 600 : 400,
+                    borderLeft: isActiveLink ? `3px solid ${G}` : "3px solid transparent",
+                    background: "transparent", transition: "background 0.1s",
+                  }}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
 
           {/* Theme toggle in mobile menu */}
           <div style={{ borderTop: `1px solid ${C.border3}`, padding: "12px 20px 16px" }}>

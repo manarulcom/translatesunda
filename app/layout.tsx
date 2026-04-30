@@ -31,9 +31,6 @@ export const metadata: Metadata = {
   creator: "Translate Sunda",
   publisher: "Translate Sunda",
 
-  alternates: {
-    canonical: "/",
-  },
 
   openGraph: {
     type: "website",

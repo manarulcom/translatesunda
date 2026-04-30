@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.excerpt,
       url,
       type: "article",
-      publishedTime: article.date,
+      publishedTime: article.isoDate,
     },
     twitter: {
       card: "summary_large_image",
@@ -59,7 +59,8 @@ export default async function Page({ params }: Props) {
     headline: article.title,
     description: article.excerpt,
     image: [`${SITE_URL}/og-image.png`], 
-    datePublished: new Date(article.date).toISOString(),
+    datePublished: article.isoDate,
+    dateModified: article.isoDate,  // update ini jika artikel direvisi
     author: [{
         "@type": "Organization",
         name: "Translate Sunda",
@@ -79,7 +80,7 @@ export default async function Page({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Translate", item: SITE_URL },
+      { "@type": "ListItem", position: 1, name: "Translate Sunda", item: SITE_URL },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
       { "@type": "ListItem", position: 3, name: article.title, item: `${SITE_URL}/blog/${article.slug}` }
     ]

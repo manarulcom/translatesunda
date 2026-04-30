@@ -11,6 +11,20 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Translate Sunda", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Kontak", item: `${SITE_URL}/kontak` },
+  ],
+};
+
 export default function Kontak() {
-  return <KontakPage />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <KontakPage />
+    </>
+  );
 }

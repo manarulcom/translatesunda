@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { ARTICLES, Article } from "@/lib/articles";
 import { CAT_COLORS, G } from "@/lib/constants";
@@ -8,6 +9,26 @@ import { useTheme, colors } from "@/lib/theme";
 function catStyle(c: string, isDark: boolean): React.CSSProperties {
   const col = CAT_COLORS[c] || G;
   return { background: col + (isDark ? "25" : "18"), color: col, fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 50, display: "inline-block" };
+}
+
+// Render inline markdown: **bold** dan [link text](url)
+function renderInline(text: string): React.ReactNode[] {
+  const tokens = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
+  return tokens.map((token, i) => {
+    // Bold: **text**
+    const boldMatch = token.match(/^\*\*(.*?)\*\*$/);
+    if (boldMatch) return <strong key={i}>{boldMatch[1]}</strong>;
+    // Link: [text](url)
+    const linkMatch = token.match(/^\[(.*?)\]\((.*?)\)$/);
+    if (linkMatch) {
+      const isInternal = linkMatch[2].startsWith("/") || linkMatch[2].includes("translatesunda.id");
+      const href = linkMatch[2].replace("https://translatesunda.id", "");
+      return isInternal
+        ? <a key={i} href={href} style={{ color: "#16a37f", textDecoration: "underline", fontWeight: 500 }}>{linkMatch[1]}</a>
+        : <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" style={{ color: "#16a37f", textDecoration: "underline", fontWeight: 500 }}>{linkMatch[1]}</a>;
+    }
+    return token;
+  });
 }
 
 export default function ArticlePage({ article }: { article: Article }) {
@@ -35,12 +56,41 @@ export default function ArticlePage({ article }: { article: Article }) {
         </div>
         <div style={{ fontSize: 17, color: C.text4, lineHeight: 1.85 }}>
           {paragraphs.map((p, i) => {
+            // H3 heading: **Title**
             if (p.startsWith("**") && p.endsWith("**"))
               return <h3 key={i} style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "28px 0 12px" }}>{p.replace(/\*\*/g, "")}</h3>;
+            // Unordered list
             if (p.startsWith("- "))
-              return <ul key={i} style={{ paddingLeft: 20, margin: "0 0 16px" }}>{p.split("\n").map((l, j) => <li key={j} style={{ marginBottom: 6 }}>{l.replace("- ", "")}</li>)}</ul>;
-            const parts = p.split(/\*\*(.*?)\*\*/g);
-            return <p key={i} style={{ margin: "0 0 18px" }}>{parts.map((pt, j) => j%2===1 ? <strong key={j}>{pt}</strong> : pt)}</p>;
+              return (
+                <ul key={i} style={{ paddingLeft: 20, margin: "0 0 16px" }}>
+                  {p.split("\n").map((l, j) => <li key={j} style={{ marginBottom: 6 }}>{renderInline(l.replace(/^- /, ""))}</li>)}
+                </ul>
+              );
+            // Table (| col | col |)
+            if (p.startsWith("|")) {
+              const rows = p.split("\n").filter(r => !r.match(/^\|[-| ]+\|$/));
+              return (
+                <div key={i} style={{ overflowX: "auto", margin: "0 0 18px" }}>
+                  <table style={{ borderCollapse: "collapse", width: "100%", fontSize: 15 }}>
+                    <tbody>
+                      {rows.map((row, ri) => {
+                        const cells = row.split("|").filter((_, ci) => ci > 0 && ci < row.split("|").length - 1);
+                        const Tag = ri === 0 ? "th" : "td";
+                        return (
+                          <tr key={ri}>
+                            {cells.map((cell, ci) => (
+                              <Tag key={ci} style={{ border: `1px solid ${C.border2}`, padding: "8px 12px", textAlign: "left", fontWeight: ri === 0 ? 700 : 400, background: ri === 0 ? C.bg2 : "transparent", color: C.text }}>{cell.trim()}</Tag>
+                            ))}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            }
+            // Regular paragraph with inline formatting
+            return <p key={i} style={{ margin: "0 0 18px" }}>{renderInline(p)}</p>;
           })}
         </div>
 
